@@ -50,6 +50,16 @@ public class BookController {
         return ResponseEntity.ok(books);
     }
     
+
+     @GetMapping("/byBookName")
+    public ResponseEntity<List<Book>> getBookBybookName(@RequestParam("bookName") String bookName) {
+        List<Book> books = bookService.findByBookName(bookName); 
+        if (books.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
+        }
+        return ResponseEntity.ok(books);
+    }
+    
     
     
 

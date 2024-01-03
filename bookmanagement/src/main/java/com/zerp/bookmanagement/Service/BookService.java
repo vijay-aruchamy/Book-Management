@@ -7,6 +7,7 @@ import com.zerp.bookmanagement.Repository.BookRepository;
 
 @Service
 public interface BookService {
-   
+
+    }
     
-}
+

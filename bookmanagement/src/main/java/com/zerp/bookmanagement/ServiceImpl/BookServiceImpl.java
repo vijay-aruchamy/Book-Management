@@ -27,14 +27,14 @@ public class BookServiceImpl implements BookService{
         return bookRepository.findAll();
     }
 
-    public List<Book> findBookByAuthor(String author)
-    {
-        return bookRepository.findByAuthor( author);
-        
-    }
+    
 
     public List<Book> findByAuthor(String author) {
-        return null;
+        return bookRepository.findByAuthor( author);
+    }
+
+     public List<Book> findByBookName(String bookName) {
+        return bookRepository.findByBookName( bookName);
     }
     
 }
