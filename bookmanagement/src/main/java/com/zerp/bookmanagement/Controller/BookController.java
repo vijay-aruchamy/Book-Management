@@ -1,9 +1,9 @@
 package com.zerp.bookmanagement.Controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,22 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 import com.zerp.bookmanagement.Model.Book;
 import com.zerp.bookmanagement.ServiceImpl.BookServiceImpl;
 
-
 @RestController
 @RequestMapping("/books")
 public class BookController {
- private final BookServiceImpl bookService;
+    @Autowired
+    private BookServiceImpl bookService;
 
-    public BookController(BookServiceImpl bookService) {
-        this.bookService = bookService;
-    }
-
-    
     @PostMapping("/addBook")
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        book.setCreatedDate(LocalDate. now());
+        book.setCreatedDate(LocalDate.now());
         book.setModifiedDate(LocalDate.now());
-        Book savedBook = bookService.saveBook(book); 
+        Book savedBook = bookService.saveBook(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
     }
 
@@ -43,26 +38,20 @@ public class BookController {
 
     @GetMapping("/byAuthor")
     public ResponseEntity<List<Book>> getBooksByAuthor(@RequestParam("author") String author) {
-        List<Book> books = bookService.findByAuthor(author); 
+        List<Book> books = bookService.findByAuthor(author);
         if (books.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(books);
     }
-    
 
-     @GetMapping("/byBookName")
+    @GetMapping("/byBookName")
     public ResponseEntity<List<Book>> getBookBybookName(@RequestParam("bookName") String bookName) {
-        List<Book> books = bookService.findByBookName(bookName); 
+        List<Book> books = bookService.findByBookName(bookName);
         if (books.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); 
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
         return ResponseEntity.ok(books);
     }
-    
-    
-    
 
-
-    
 }

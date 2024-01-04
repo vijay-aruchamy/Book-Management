@@ -1,6 +1,7 @@
 package com.zerp.bookmanagement.Model;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,8 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "order_details")
@@ -30,13 +29,11 @@ public class OrderDetails {
     @Column(name = "isactive")
     private boolean isActive;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
-    private Date createdDate;
+    private LocalDate createdDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "modified_date")
-    private Date modifiedDate;
+    private LocalDate modifiedDate;
 
     public Long getId() {
         return id;
@@ -70,26 +67,24 @@ public class OrderDetails {
         this.isActive = isActive;
     }
 
-    public Date getCreatedDate() {
+    public LocalDate getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
     }
 
-    public Date getModifiedDate() {
+    public LocalDate getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Date modifiedDate) {
+    public void setModifiedDate(LocalDate modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 
-    
     public OrderDetails() {
-        // Default constructor
+
     }
 
 }
-

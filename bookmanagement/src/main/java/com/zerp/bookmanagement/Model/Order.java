@@ -1,6 +1,7 @@
 package com.zerp.bookmanagement.Model;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,9 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-
 
 @Entity
 @Table(name = "orders")
@@ -25,8 +23,7 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date timestamp;
+    private LocalDate timestamp;
 
     @Column(name = "status_id")
     private int statusId;
@@ -34,89 +31,70 @@ public class Order {
     @Column(name = "isactive")
     private boolean isActive;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
-    private Date createdDate;
+    private LocalDate createdDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "modified_date")
-    private Date modifiedDate;
+    private LocalDate modifiedDate;
 
-    
     public Long getOrderId() {
         return orderId;
     }
-
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 
-
     public User getUser() {
         return user;
     }
-
 
     public void setUser(User user) {
         this.user = user;
     }
 
-
-    public Date getTimestamp() {
+    public LocalDate getTimestamp() {
         return timestamp;
     }
 
-
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(LocalDate timestamp) {
         this.timestamp = timestamp;
     }
-
 
     public int getStatusId() {
         return statusId;
     }
 
-
     public void setStatusId(int statusId) {
         this.statusId = statusId;
     }
-
 
     public boolean isActive() {
         return isActive;
     }
 
-
     public void setActive(boolean isActive) {
         this.isActive = isActive;
     }
 
-
-    public Date getCreatedDate() {
+    public LocalDate getCreatedDate() {
         return createdDate;
     }
 
-
-    public void setCreatedDate(Date createdDate) {
+    public void setCreatedDate(LocalDate createdDate) {
         this.createdDate = createdDate;
     }
 
-
-    public Date getModifiedDate() {
+    public LocalDate getModifiedDate() {
         return modifiedDate;
     }
 
-
-    public void setModifiedDate(Date modifiedDate) {
+    public void setModifiedDate(LocalDate modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 
-
-    // Hibernate/JPA requires a no-arg constructor for entities
     public Order() {
-        // Default constructor
+
     }
 
-   
 }

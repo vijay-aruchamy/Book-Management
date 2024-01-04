@@ -1,123 +1,96 @@
 package com.zerp.bookmanagement.Model;
 
-import java.util.Date;
+import java.time.LocalDate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
-@Table(name = "user") 
+@Table(name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long user_id; 
+    private Long userId;
 
     @Column(name = "user_name")
     private String userName;
     private String email;
     private String role;
     private String password;
-     @Column(name = "is_active")
-    private boolean is_active;
-    
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "is_active")
+    private boolean isActive;
+
     @Column(name = "created_date")
-    private Date createdDate;
+    private LocalDate createdDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "modified_date")
-    private Date modifiedDate;
+    private LocalDate modifiedDate;
 
-    
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
-
-    public String getUser_name() {
+    public String getUserName() {
         return userName;
     }
-
 
     public String getEmail() {
         return email;
     }
 
-
     public String getRole() {
         return role;
     }
-
 
     public String getPassword() {
         return password;
     }
 
-
-    public boolean isIs_active() {
-        return is_active;
+    public boolean isActive() {
+        return isActive;
     }
 
-
-    public Date getCreatedDate() {
+    public LocalDate getCreatedDate() {
         return createdDate;
     }
 
-
-    public Date getModifiedDate() {
+    public LocalDate getModifiedDate() {
         return modifiedDate;
     }
 
-
-    public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-
-    public void setUser_name(String user_name) {
+    public void setUserName(String user_name) {
         this.userName = user_name;
     }
-
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-
     public void setRole(String role) {
         this.role = role;
     }
-
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-
-    public void setIs_active(boolean is_active) {
-        this.is_active = is_active;
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
+    public void setCreatedDate(LocalDate localDate) {
+        this.createdDate = localDate;
     }
 
-
-    public void setModifiedDate(Date modifiedDate) {
-        this.modifiedDate = modifiedDate;
+    public void setModifiedDate(LocalDate localDate) {
+        this.modifiedDate = localDate;
     }
-
-
-    public User() {
-      
-    }
-
 
 }
-

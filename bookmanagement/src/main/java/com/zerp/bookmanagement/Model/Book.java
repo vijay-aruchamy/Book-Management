@@ -1,6 +1,5 @@
 package com.zerp.bookmanagement.Model;
 
-
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -93,8 +92,4 @@ public class Book {
         this.modifiedDate = modifiedDate;
     }
 
-   
 }
-
-    
-
