@@ -23,7 +23,6 @@ public class UserController {
     public ResponseEntity<User> addUser(@RequestBody User user) {
         user.setCreatedDate(LocalDate.now());
         user.setModifiedDate(LocalDate.now());
-        
         User savedUser =userService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
 

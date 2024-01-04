@@ -1,5 +1,6 @@
 package com.zerp.bookmanagement.Model;
 
+import java.beans.JavaBean;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -11,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+@JavaBean
 @Entity
 @Table(name = "carts")
 public class Cart {
@@ -20,7 +22,7 @@ public class Cart {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private User  user;
 
     @Column(name = "isactive")
     private boolean isActive;
@@ -42,11 +44,12 @@ public class Cart {
         this.cartId = cartId;
     }
 
-    public User getUser() {
+    public User getUserId() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUserId(User user) {
+        System.out.println("hiii");
         this.user = user;
     }
 

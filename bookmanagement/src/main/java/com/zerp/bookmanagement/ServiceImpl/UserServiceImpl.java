@@ -1,10 +1,11 @@
 package com.zerp.bookmanagement.ServiceImpl;
 
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zerp.bookmanagement.Model.Cart;
 import com.zerp.bookmanagement.Model.User;
 import com.zerp.bookmanagement.Repository.UserRepository;
 import com.zerp.bookmanagement.Service.UserService;
@@ -14,9 +15,18 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
-    
+
+    @Autowired
+    private CartServiceImpl cartService;
+
+
+   
 
     public User addUser(User user) {
+       
+        cartService.addUser(user);
+        
+        System.out.println("iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
         return userRepository.save(user);
     }
 
