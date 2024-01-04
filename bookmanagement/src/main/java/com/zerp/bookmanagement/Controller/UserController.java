@@ -29,17 +29,6 @@ public class UserController {
 
     }
 
-    // @PostMapping("/login")
-    // public ResponseEntity<User> login( User user) {
-    //     //user.setCreatedDate(LocalDate.now());
-    //     //user.setModifiedDate(LocalDate.now());
-    //     //userService.addUser(user);
-    //     System.out.println("Before LOGIN");
-    //     userService.loginCheck(user);
-
-    //     return ResponseEntity.status(HttpStatus.CREATED).body(user);
-
-    // }
 
     
     @PostMapping("/login")
