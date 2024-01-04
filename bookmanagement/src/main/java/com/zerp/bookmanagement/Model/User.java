@@ -93,4 +93,9 @@ public class User {
         this.modifiedDate = localDate;
     }
 
+    User()
+    {
+        
+    }
+
 }

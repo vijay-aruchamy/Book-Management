@@ -23,9 +23,30 @@ public class UserController {
     public ResponseEntity<User> addUser(@RequestBody User user) {
         user.setCreatedDate(LocalDate.now());
         user.setModifiedDate(LocalDate.now());
-        userService.addUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+        
+        User savedUser =userService.addUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
 
     }
 
+    // @PostMapping("/login")
+    // public ResponseEntity<User> login( User user) {
+    //     //user.setCreatedDate(LocalDate.now());
+    //     //user.setModifiedDate(LocalDate.now());
+    //     //userService.addUser(user);
+    //     System.out.println("Before LOGIN");
+    //     userService.loginCheck(user);
+
+    //     return ResponseEntity.status(HttpStatus.CREATED).body(user);
+
+    // }
+
+    
+    @PostMapping("/login")
+    public String login(@RequestBody User user)
+    {
+      return   userService.loginCheck(user);
+         
+    }
+    
 }
