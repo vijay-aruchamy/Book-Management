@@ -23,6 +23,6 @@ public class CartServiceImpl implements CartService{
         cart.setCreatedDate(LocalDate.now());
         cart.setModifiedDate(LocalDate.now());
         cartRepository.save(cart);
-        System.out.println("vijayyyyyyyyyy");
+        
     }
 }
