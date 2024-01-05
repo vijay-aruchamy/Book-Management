@@ -2,6 +2,9 @@ package com.zerp.bookmanagement.ServiceImpl;
 
 
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,12 +32,23 @@ public class UserServiceImpl implements UserService {
     }
 
     public String loginCheck(User user1) {
-        System.out.println("user1.getUserName()");
-        User user = userRepository. findByuserName(user1.getUserName());
-         System.out.println("loginCheck1");
-        if(user.getPassword().equals(user1.getPassword()))
-        return "true";
+        
+        if(user1.getUserName()==null)
         return "false";
+        else
+        {
+        User user = userRepository. findByuserName(user1.getUserName());
+        if(user!=null && user.getPassword().equals(user1.getPassword()))
+        return "true";
+        }
+        return "false";
+    }
+
+
+    public Optional<User> findUserById(Long userId)
+    {
+   
+   return userRepository.findById(userId);
     }
 
 

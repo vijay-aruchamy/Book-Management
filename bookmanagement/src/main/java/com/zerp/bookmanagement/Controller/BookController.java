@@ -33,7 +33,7 @@ public class BookController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Book>> getAllBooks() {
-        List<Book> books = bookService.getAllBooks(); // Retrieve all books via the service
+        List<Book> books = bookService.getAllBooks(); 
         return ResponseEntity.ok(books);
     }
 

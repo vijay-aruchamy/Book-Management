@@ -49,7 +49,6 @@ public class Cart {
     }
 
     public void setUserId(User user) {
-        System.out.println("hiii");
         this.user = user;
     }
 

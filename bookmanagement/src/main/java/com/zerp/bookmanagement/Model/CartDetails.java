@@ -47,6 +47,9 @@ public class CartDetails {
         return cart;
     }
 
+    /**
+     * @param cart
+     */
     public void setCart(Cart cart) {
         this.cart = cart;
     }

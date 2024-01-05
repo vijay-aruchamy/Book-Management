@@ -7,6 +7,9 @@ import com.zerp.bookmanagement.Model.CartDetails;
 
 @Repository
 public interface CartDetailsRepository extends JpaRepository<CartDetails, Long> {
-    // You can add custom queries or methods specific to CartDetails if needed
 }
+
+    
+
+    
 
