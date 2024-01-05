@@ -1,5 +1,7 @@
 package com.zerp.bookmanagement.ServiceImpl;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zerp.bookmanagement.Model.CartDetails;
+import com.zerp.bookmanagement.Model.Book;
 import com.zerp.bookmanagement.Model.Cart;
 import com.zerp.bookmanagement.Model.User;
 import com.zerp.bookmanagement.Repository.CartDetailsRepository;
@@ -21,14 +24,36 @@ public class CartDetailsServiceImpl implements CartDetailsService{
      CartRepository cartRepository;
      @Autowired
      UserServiceImpl userServiceImpl;
+     @Autowired
+     BookServiceImpl bookServiceImpl;
+
+
 
     public void addCart(Map<String,Long> data) {
         Optional<User> user=userServiceImpl.findUserById(data.get("userId"));
         
         CartDetails cartDetails=new CartDetails();
       Cart cart=cartRepository.findCartIdByuser(user);
+        Optional<Book> book=bookServiceImpl.findBookById(data.get("bookId"));
+        cartDetails.setBook(book.get());
        cartDetails.setCart(cart);
-        // cartDetails.setUserId(data.get("userId"));
+       cartDetails.setCreatedDate(LocalDate.now());
+         cartDetails.setModifiedDate(LocalDate.now());
         cartDetailsRepository.save(cartDetails);
     }
+
+
+
+
+    public List<CartDetails> getCartDetails(Long userId) {
+        Optional<User> user=userServiceImpl.findUserById(userId);
+         Cart cart=cartRepository.findCartIdByuser(user);
+         if(cartDetailsRepository.findByCart(cart)!=null)
+         return cartDetailsRepository.findByCart(cart);
+        return null;
+        
+    }
+
+
+    
 }

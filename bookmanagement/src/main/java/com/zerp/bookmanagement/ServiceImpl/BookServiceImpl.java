@@ -1,6 +1,7 @@
 package com.zerp.bookmanagement.ServiceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,10 @@ public class BookServiceImpl implements BookService{
 
      public List<Book> findByBookName(String bookName) {
         return bookRepository.findByBookName( bookName);
+    }
+
+    public  Optional<Book> findBookById(Long long1) {
+        return bookRepository.findById(long1);
     }
     
 }
