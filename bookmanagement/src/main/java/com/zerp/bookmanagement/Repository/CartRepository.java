@@ -11,7 +11,9 @@ import com.zerp.bookmanagement.Model.User;
 @Repository
 public interface CartRepository extends JpaRepository<Cart, Long> {
 
-    Cart findCartIdByuser(Optional<User> user);
+    Cart findCartIdByuser(User user);
     // You can add custom queries or methods specific to Carts if needed
+
 }
 
+  

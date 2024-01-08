@@ -24,8 +24,7 @@ public class BookController {
 
     @PostMapping("/addBook")
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        book.setCreatedDate(LocalDate.now());
-        book.setModifiedDate(LocalDate.now());
+       
         System.out.println(book.getBookName());
         Book savedBook = bookService.saveBook(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);

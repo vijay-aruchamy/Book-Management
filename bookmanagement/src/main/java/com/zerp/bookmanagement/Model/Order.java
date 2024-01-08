@@ -1,6 +1,7 @@
 package com.zerp.bookmanagement.Model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,10 +23,11 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+     
+    @Column
+    private LocalDateTime timestamp;
 
-    private LocalDate timestamp;
-
-    @Column(name = "status_id")
+    @Column(name = "status_id",columnDefinition = "VARCHAR(255) DEFAULT '1'")
     private int statusId;
 
     @Column(name = "isactive")
@@ -53,14 +55,14 @@ public class Order {
         this.user = user;
     }
 
-    public LocalDate getTimestamp() {
+    public LocalDateTime getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(LocalDate timestamp) {
+    public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
-
+    
     public int getStatusId() {
         return statusId;
     }

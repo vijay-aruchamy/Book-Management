@@ -7,6 +7,9 @@ import com.zerp.bookmanagement.Model.Order;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    // You can add custom queries or methods specific to Orders if needed
+
+    
+
+  
 }
 

@@ -34,14 +34,14 @@ public class UserServiceImpl implements UserService {
     public String loginCheck(User user1) {
         
         if(user1.getUserName()==null)
-        return "false";
+        return "Login UnSuccessful No User Found";
         else
         {
         User user = userRepository. findByuserName(user1.getUserName());
         if(user!=null && user.getPassword().equals(user1.getPassword()))
-        return "true";
+        return "Login Successful Welcome";
         }
-        return "false";
+        return "Login UnSuccessful Password is Wrong ";
     }
 
 
