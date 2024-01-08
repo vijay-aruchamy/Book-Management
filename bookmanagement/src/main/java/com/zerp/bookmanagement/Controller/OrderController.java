@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.zerp.bookmanagement.Model.Order;
 import com.zerp.bookmanagement.Model.User;
+import com.zerp.bookmanagement.ServiceImpl.OrderDetailsServiceImpl;
 import com.zerp.bookmanagement.ServiceImpl.OrderServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,9 @@ public class OrderController {
 
     @Autowired
 OrderServiceImpl orderServiceImpl;
+
+@Autowired
+OrderDetailsServiceImpl orderDetailsServiceImpl;
 
 @PostMapping("/orderItem")
 public ResponseEntity<String> orderProcess(@RequestBody Map<String,Long> data)
@@ -48,5 +52,11 @@ public ResponseEntity<String> getMethodName(@RequestBody Order order){
     return ResponseEntity.ok("Conformed");
 }
 
+@PostMapping("/checkout")
+public Map<String,Double> checkOutProcess(@RequestBody Order order)
+{
+    return orderDetailsServiceImpl.checkoutProcess(order);
+
+}
     
 }

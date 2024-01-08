@@ -67,8 +67,11 @@ public class CartDetailsServiceImpl implements CartDetailsService{
       Optional<Book> book=bookRepository.findById(bookId);
       Optional<User> user=userRepository.findById(userId);
       Cart cart=cartRepository.findCartIdByuser(user.get());
-      System.out.println("reaching");
-      cartDetailsRepository.deleteByCartAndBook(cart,book.get());
+       List<CartDetails> cartDetails=cartDetailsRepository.findByCart(cart);
+       for(CartDetails items:cartDetails)
+       {
+        items.setActive(false);
+       }
     }
 
 
