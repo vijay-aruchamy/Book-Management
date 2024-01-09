@@ -15,48 +15,43 @@ import com.zerp.bookmanagement.ServiceImpl.OrderServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
-
 @RestController
 @RequestMapping("/order")
 public class OrderController {
 
     @Autowired
-OrderServiceImpl orderServiceImpl;
+    OrderServiceImpl orderServiceImpl;
 
-@Autowired
-OrderDetailsServiceImpl orderDetailsServiceImpl;
+    @Autowired
+    OrderDetailsServiceImpl orderDetailsServiceImpl;
 
-@PostMapping("/orderItem")
-public ResponseEntity<String> orderProcess(@RequestBody Map<String,Long> data)
-{
+    @PostMapping("/orderItem")
+    public ResponseEntity<String> orderProcess(@RequestBody Map<String, Long> data) {
 
-    orderServiceImpl.orderPlace(data);
-    return ResponseEntity.ok("ok");
-    
-}
+        orderServiceImpl.orderPlace(data);
+        return ResponseEntity.ok("ok");
 
-@PostMapping("/cartOrder")
-public ResponseEntity<String> cartOrder(@RequestBody User user)
-{
+    }
 
-    orderServiceImpl.cartOrderPlace(user.getUserId());
-    return ResponseEntity.ok("ok");
-    
-}
+    @PostMapping("/cartOrder")
+    public ResponseEntity<String> cartOrder(@RequestBody User user) {
 
-@GetMapping("/conform")
-public ResponseEntity<String> getMethodName(@RequestBody Order order){
-    System.out.println(order.getOrderId());
-    orderServiceImpl.orderConform(order.getOrderId());
-    return ResponseEntity.ok("Conformed");
-}
+        orderServiceImpl.cartOrderPlace(user.getUserId());
+        return ResponseEntity.ok("ok");
 
-@PostMapping("/checkout")
-public Map<String,Double> checkOutProcess(@RequestBody Order order)
-{
-    return orderDetailsServiceImpl.checkoutProcess(order);
+    }
 
-}
-    
+    @GetMapping("/conform")
+    public ResponseEntity<String> getMethodName(@RequestBody Order order) {
+        System.out.println(order.getOrderId());
+        orderServiceImpl.orderConform(order.getOrderId());
+        return ResponseEntity.ok("Conformed");
+    }
+
+    @PostMapping("/checkout")
+    public Map<String, Double> checkOutProcess(@RequestBody Order order) {
+        return orderDetailsServiceImpl.checkoutProcess(order);
+
+    }
+
 }

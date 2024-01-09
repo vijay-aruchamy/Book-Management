@@ -11,19 +11,17 @@ import com.zerp.bookmanagement.Repository.CartRepository;
 import com.zerp.bookmanagement.Service.CartService;
 
 @Service
-public class CartServiceImpl implements CartService{
+public class CartServiceImpl implements CartService {
     @Autowired
-     private  CartRepository cartRepository;
+    private CartRepository cartRepository;
 
-     
-    
     public void addUser(User user) {
-        Cart cart=new Cart();
+        Cart cart = new Cart();
         cart.setUserId(user);
         cart.setCreatedDate(LocalDate.now());
         cart.setModifiedDate(LocalDate.now());
         cart.setActive(true);
         cartRepository.save(cart);
-        
+
     }
 }

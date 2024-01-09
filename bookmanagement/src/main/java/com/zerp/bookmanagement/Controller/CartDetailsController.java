@@ -2,9 +2,7 @@ package com.zerp.bookmanagement.Controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zerp.bookmanagement.Model.Book;
 import com.zerp.bookmanagement.Model.CartDetails;
-import com.zerp.bookmanagement.Model.User;
 import com.zerp.bookmanagement.ServiceImpl.CartDetailsServiceImpl;
 
 import java.util.List;
@@ -18,42 +16,35 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
 @RestController
 @RequestMapping("/cart")
 public class CartDetailsController {
- 
+
     @Autowired
     CartDetailsServiceImpl cartDetailsService;
 
-
     @PostMapping("/addCart")
-    public ResponseEntity<String> getMethodName(@RequestBody Map<String,Long> data) {
+    public ResponseEntity<String> getMethodName(@RequestBody Map<String, Long> data) {
         cartDetailsService.addCart(data);
-         
-        
+
         return ResponseEntity.status(HttpStatus.CREATED).body("added to the cart");
     }
 
     @GetMapping("/showCart")
-    public ResponseEntity<List<CartDetails>> showCart(@RequestBody Map<String,Long> data)
-    {
-        
+    public ResponseEntity<List<CartDetails>> showCart(@RequestBody Map<String, Long> data) {
 
-        List<CartDetails> data1=cartDetailsService.getCartDetails(data.get("userId"));
+        List<CartDetails> data1 = cartDetailsService.getCartDetails(data.get("userId"));
 
         return ResponseEntity.ok(data1);
 
     }
 
     @PostMapping("/deleteBook")
-    public ResponseEntity<String> deleteItem(@RequestBody Map<String,Long> data)
-    {
-        cartDetailsService.updateCart(data.get("userId"),data.get("id"));
+    public ResponseEntity<String> deleteItem(@RequestBody Map<String, Long> data) {
+        cartDetailsService.updateCart(data.get("userId"), data.get("id"));
         System.out.println(data.get("id"));
         return ResponseEntity.ok("Deleted");
 
     }
-    
+
 }

@@ -1,6 +1,7 @@
 package com.zerp.bookmanagement.Controller;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.zerp.bookmanagement.Model.User;
 import com.zerp.bookmanagement.ServiceImpl.UserServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -35,6 +38,13 @@ public class UserController {
     {
       return   userService.loginCheck(user);
          
+    }
+
+
+    @GetMapping("/getuser")
+    public ResponseEntity<Optional<User>> getUser(@RequestParam("userId") Long userId)
+    {
+      return ResponseEntity.ok(userService.findUserById(userId));
     }
     
 }

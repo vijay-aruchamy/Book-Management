@@ -1,6 +1,5 @@
 package com.zerp.bookmanagement.Controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class BookController {
 
     @PostMapping("/addBook")
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
-       
+
         System.out.println(book.getBookName());
         Book savedBook = bookService.saveBook(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
@@ -32,7 +31,7 @@ public class BookController {
 
     @GetMapping("/all")
     public ResponseEntity<List<Book>> getAllBooks() {
-        List<Book> books = bookService.getAllBooks(); 
+        List<Book> books = bookService.getAllBooks();
         return ResponseEntity.ok(books);
     }
 
