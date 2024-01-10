@@ -35,6 +35,19 @@ public class OrderDetails {
     @Column(name = "modified_date")
     private LocalDate modifiedDate;
 
+    
+    @Column(name = "quantity")
+    private int Quantity;
+
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
+    }
+
+
     public Long getId() {
         return id;
     }

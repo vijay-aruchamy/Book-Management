@@ -26,14 +26,24 @@ public class CartDetails {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @Column(name = "isactive")
-    private boolean isActive;
 
     @Column(name = "created_date")
     private LocalDate createdDate;
 
     @Column(name = "modified_date")
     private LocalDate modifiedDate;
+
+
+    @Column(name = "quantity")
+    private int Quantity;
+
+    public int getQuantity() {
+        return Quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
+    }
 
     public Long getId() {
         return id;
@@ -47,9 +57,7 @@ public class CartDetails {
         return cart;
     }
 
-    /**
-     * @param cart
-     */
+   
     public void setCart(Cart cart) {
         this.cart = cart;
     }
@@ -60,14 +68,6 @@ public class CartDetails {
 
     public void setBook(Book book) {
         this.book = book;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean isActive) {
-        this.isActive = isActive;
     }
 
     public LocalDate getCreatedDate() {

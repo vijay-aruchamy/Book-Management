@@ -1,128 +1,125 @@
-Book Table:
+CREATE TABLE `addresses` (
+  `address_id` bigint NOT NULL AUTO_INCREMENT,
+  `address_line1` varchar(30) DEFAULT NULL,
+  `address_line2` varchar(30) DEFAULT NULL,
+  `created_date` datetime(6) DEFAULT NULL,
+  `district` varchar(20) DEFAULT NULL,
+  `isactive` bit(1) DEFAULT NULL,
+  `modified_date` datetime(6) DEFAULT NULL,
+  `pincode` varchar(10) DEFAULT NULL,
+  `state` varchar(20) DEFAULT NULL,
+  `user_id` bigint DEFAULT NULL,
+  PRIMARY KEY (`address_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `addresses_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+
 CREATE TABLE `book` (
   `book_id` bigint NOT NULL AUTO_INCREMENT,
-  `author` varchar(255) DEFAULT NULL,
-  `book_name` varchar(255) DEFAULT NULL,
-  `created_date` date DEFAULT NULL,
-  `isactive` bit(1) DEFAULT NULL,
-  `modified_date` date DEFAULT NULL,
-  `price` double DEFAULT NULL,
-  PRIMARY KEY (`book_id`)
+  `book_name` varchar(30) DEFAULT NULL,
+  `author` varchar(25) DEFAULT NULL,
+  `Quantity` int DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`book_id`),
+  UNIQUE KEY `book_author_unique` (`book_name`,`author`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 
-user table:
-
-CREATE TABLE `user` (
-  `user_id` bigint NOT NULL AUTO_INCREMENT,
-  `created_date` date DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `is_active` bit(1) DEFAULT NULL,
-  `modified_date` date DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  `role` varchar(255) DEFAULT NULL,
-  `user_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-
-Address Table:
-
-CREATE TABLE `addresses` (
-  `address_id` bigint NOT NULL AUTO_INCREMENT,
-  `address_line1` varchar(255) DEFAULT NULL,
-  `address_line2` varchar(255) DEFAULT NULL,
-  `created_date` datetime(6) DEFAULT NULL,
-  `district` varchar(255) DEFAULT NULL,
-  `isactive` bit(1) DEFAULT NULL,
-  `modified_date` datetime(6) DEFAULT NULL,
-  `pincode` varchar(255) DEFAULT NULL,
-  `state` varchar(255) DEFAULT NULL,
-  `user_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`address_id`),
-  KEY `FKr1tcj8kqft8gecp5kmnarw7cs` (`user_id`),
-  CONSTRAINT `FKr1tcj8kqft8gecp5kmnarw7cs` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-
-cart table:
-
-CREATE TABLE `carts` (
+CREATE TABLE `cart` (
   `cart_id` bigint NOT NULL AUTO_INCREMENT,
-  `created_date` datetime(6) DEFAULT NULL,
-  `isactive` bit(1) DEFAULT NULL,
-  `modified_date` datetime(6) DEFAULT NULL,
   `user_id` bigint DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`cart_id`),
-  KEY `FKpay9408fi1tlnkqv3fhetr6hy` (`user_id`),
-  CONSTRAINT `FKpay9408fi1tlnkqv3fhetr6hy` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-cartdetails table:
+
 
 CREATE TABLE `cart_details` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_date` datetime(6) DEFAULT NULL,
-  `isactive` bit(1) DEFAULT NULL,
-  `modified_date` datetime(6) DEFAULT NULL,
-  `book_id` bigint DEFAULT NULL,
   `cart_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK6iepicl9n7bwcnbtv4et4cd1y` (`book_id`),
-  KEY `FKkcochhsa891wv0s9wrtf36wgt` (`cart_id`),
-  CONSTRAINT `FK6iepicl9n7bwcnbtv4et4cd1y` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`),
-  CONSTRAINT `FKkcochhsa891wv0s9wrtf36wgt` FOREIGN KEY (`cart_id`) REFERENCES `carts` (`cart_id`)
+  `book_id` bigint DEFAULT NULL,
+  `quantity` int DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  KEY `cart_id` (`cart_id`),
+  KEY `book_id` (`book_id`),
+  CONSTRAINT `cart_details_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `cart` (`cart_id`) ON DELETE CASCADE,
+  CONSTRAINT `cart_details_ibfk_2` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-order table:
+
+CREATE TABLE `order_details` (
+  `order_id` bigint DEFAULT NULL,
+  `book_id` bigint DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `qunatity` int DEFAULT NULL,
+  KEY `book_id` (`book_id`),
+  KEY `order_id` (`order_id`),
+  CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`),
+  CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+CREATE TABLE `order_status` (
+  `status_id` int NOT NULL AUTO_INCREMENT,
+  `status` varchar(15) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`status_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
 
 CREATE TABLE `orders` (
   `order_id` bigint NOT NULL AUTO_INCREMENT,
-  `created_date` datetime(6) DEFAULT NULL,
-  `isactive` bit(1) DEFAULT NULL,
-  `modified_date` datetime(6) DEFAULT NULL,
-  `status_id` int DEFAULT NULL,
-  `timestamp` datetime(6) DEFAULT NULL,
   `user_id` bigint DEFAULT NULL,
+  `status_id` int DEFAULT NULL,
+  `ordered_date` datetime DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `address_id` bigint DEFAULT NULL,
   PRIMARY KEY (`order_id`),
-  KEY `FKel9kyl84ego2otj2accfd8mr7` (`user_id`),
-  CONSTRAINT `FKel9kyl84ego2otj2accfd8mr7` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  KEY `status_id` (`status_id`),
+  KEY `address_id` (`address_id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`status_id`) REFERENCES `order_status` (`status_id`),
+  CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`address_id`),
+  CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 
-orderdetails table:
-
-  CREATE TABLE `order_details` (
-  `id` bigint NOT NULL AUTO_INCREMENT,
-  `created_date` datetime(6) DEFAULT NULL,
-  `isactive` bit(1) DEFAULT NULL,
-  `modified_date` datetime(6) DEFAULT NULL,
-  `book_id` bigint DEFAULT NULL,
-  `order_id` bigint DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKgvkjwcye435v1trjiva43xduq` (`book_id`),
-  KEY `FKjyu2qbqt8gnvno9oe9j2s2ldk` (`order_id`),
-  CONSTRAINT `FKgvkjwcye435v1trjiva43xduq` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`),
-  CONSTRAINT `FKjyu2qbqt8gnvno9oe9j2s2ldk` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `user` (
+  `user_id` bigint NOT NULL AUTO_INCREMENT,
+  `user_name` varchar(30) DEFAULT NULL,
+  `email` varchar(25) DEFAULT NULL,
+  `role` varchar(10) DEFAULT NULL,
+  `created_date` datetime DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `is_active` tinyint(1) DEFAULT '1',
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `name_email_unique` (`user_name`,`email`),
+  CONSTRAINT `chk_valid_email` CHECK (regexp_like(`email`,_utf8mb4'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$'))
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 
-orderstatus table:
 
-CREATE TABLE `order_status` (
-  `status_id` bigint NOT NULL AUTO_INCREMENT,
-  `created_date` datetime(6) DEFAULT NULL,
-  `isactive` bit(1) DEFAULT NULL,
-  `modified_date` datetime(6) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`status_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 
