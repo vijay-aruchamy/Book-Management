@@ -24,9 +24,19 @@ public class UserServiceImpl implements UserService {
    
 
     public User addUser(User user) {
-       
+        if (user.getUserName() == null || user.getPassword() == null) {
+            throw new IllegalArgumentException("Username or password cannot be null");
+        } 
+        try
+        {
        user = userRepository.save(user);
         cartService.addUser(user);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException("user already exists");
+        }
         return user;
     }
 

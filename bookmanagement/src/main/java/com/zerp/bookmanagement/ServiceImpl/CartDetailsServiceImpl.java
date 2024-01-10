@@ -55,15 +55,15 @@ public class CartDetailsServiceImpl implements CartDetailsService {
 
   }
 
-  public void updateCart(Long userId, Long bookId) {
-    System.out.println(bookId);
-    Optional<Book> book = bookRepository.findById(bookId);
-    Optional<User> user = userRepository.findById(userId);
-    Cart cart = cartRepository.findCartIdByuser(user.get());
-    List<CartDetails> cartDetails = cartDetailsRepository.findByCart(cart);
-    for (CartDetails items : cartDetails) {
-      items.setActive(false);
-    }
-  }
+  // public void updateCart(Long userId, Long bookId) {
+  //   System.out.println(bookId);
+  //   Optional<Book> book = bookRepository.findById(bookId);
+  //   Optional<User> user = userRepository.findById(userId);
+  //   Cart cart = cartRepository.findCartIdByuser(user.get());
+  //   List<CartDetails> cartDetails = cartDetailsRepository.findByCart(cart);
+  //   for (CartDetails items : cartDetails) {
+  //     items.;
+  //   }
+  // }
 
 }
