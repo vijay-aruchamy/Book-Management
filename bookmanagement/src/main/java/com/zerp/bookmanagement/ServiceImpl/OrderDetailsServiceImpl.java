@@ -36,7 +36,6 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     OrderDetails orderDetails = new OrderDetails();
     orderDetails.setOrder(order);
     orderDetails.setBook(book.get());
-    orderDetails.setActive(true);
     orderDetails.setCreatedDate(LocalDateTime.now());
     orderDetails.setModifiedDate(LocalDateTime.now());
     orderDetailsRepository.save(orderDetails);
@@ -50,9 +49,9 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
       OrderDetails orderDetails = new OrderDetails();
       orderDetails.setOrder(order);
       Book book = cart1.getBook();
+     int bookQuantity= book.getQuantity();
       orderDetails.setBook(book);
       orderDetails.setCreatedDate(LocalDateTime.now());
-      orderDetails.setActive(true);
       orderDetails.setModifiedDate(LocalDateTime.now());
       orderDetailsRepository.save(orderDetails);
     }
@@ -66,11 +65,9 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     List<OrderDetails> orderDetails = orderDetailsRepository.findByOrder(order1.get());
     double total = 0;
     for (OrderDetails items : orderDetails) {
-      if (items.isActive() == true) {
         Book book = items.getBook();
         data.put(book.getBookName(), book.getPrice());
         total += book.getPrice();
-      }
     }
     data.put("total", total);
     return data;

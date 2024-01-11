@@ -1,7 +1,6 @@
 package com.zerp.bookmanagement.ServiceImpl;
 
 import java.time.LocalDateTime;
-import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Optional;
 
@@ -40,11 +39,8 @@ public class OrderServiceImpl implements OrderService {
 
     User user = userRepository.findByUserId(data.get("userId"));
     Optional<Book> book = bookRepository.findById(data.get("bookId"));
-    order.setActive(true);
     order.setCreatedDate(LocalDateTime.now());
     order.setModifiedDate(LocalDateTime.now());
-    order.setTimestamp(LocalDateTime.now());
-    order.setStatusId(1);
     order.setUser(user);
     orderRepository.save(order);
     orderDetailsServiceImpl.createOrder(order, book);
@@ -56,11 +52,8 @@ public class OrderServiceImpl implements OrderService {
     Cart cart = cartRepository.findCartIdByuser(user);
     Order order = new Order();
     order.setUser(user);
-    order.setStatusId(1);
-    order.setTimestamp(LocalDateTime.now());
     order.setCreatedDate(LocalDateTime.now());
     order.setModifiedDate(LocalDateTime.now());
-    order.setActive(true);
     orderRepository.save(order);
     orderDetailsServiceImpl.createCartOrder(order, cart);
 

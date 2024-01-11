@@ -20,7 +20,7 @@ public class OrderStatus {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "isactive")
+    @Column(name = "is_active")
     private boolean isActive;
 
     @Column(name = "created_date")

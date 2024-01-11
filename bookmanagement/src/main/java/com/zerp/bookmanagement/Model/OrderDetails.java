@@ -26,8 +26,6 @@ public class OrderDetails {
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @Column(name = "isactive")
-    private boolean isActive;
 
     @Column(name = "created_date")
     private LocalDateTime createdDate;
@@ -70,14 +68,6 @@ public class OrderDetails {
 
     public void setBook(Book book) {
         this.book = book;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean isActive) {
-        this.isActive = isActive;
     }
 
     public LocalDateTime getCreatedDate() {

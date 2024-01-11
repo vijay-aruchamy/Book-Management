@@ -1,6 +1,6 @@
 package com.zerp.bookmanagement.Controller;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,8 @@ public class UserController {
 
     @PostMapping("/adduser")
     public ResponseEntity<User> addUser(@RequestBody User user) {
-        user.setCreatedDate(LocalDate.now());
-        user.setModifiedDate(LocalDate.now());
+        user.setCreatedDate(LocalDateTime.now());
+        user.setModifiedDate(LocalDateTime.now());
         User savedUser =userService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
 

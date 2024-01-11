@@ -24,7 +24,7 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private User  user;
 
-    @Column(name = "isactive")
+    @Column(name = "is_active")
     private boolean isActive;
 
     @Column(name = "created_date")

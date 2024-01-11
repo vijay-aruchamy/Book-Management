@@ -30,7 +30,7 @@ public class Book {
     @Column(name = "price")
     private double price;
 
-    @Column(name = "isactive")
+    @Column(name = "is_active")
     private boolean isActive;
 
     @Column(name = "created_date")

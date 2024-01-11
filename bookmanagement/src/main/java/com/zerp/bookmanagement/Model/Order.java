@@ -24,16 +24,14 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
      
-    @Column
-    private LocalDateTime timestamp;
+
 
     @Column(name = "status_id",columnDefinition = "VARCHAR(255) DEFAULT '1'")
     private int statusId;
 
-    @Column(name = "isactive")
-    private boolean isActive;
 
-    @Column(name = "created_date")
+
+    @Column(name = "ordered_date")
     private LocalDateTime createdDate;
 
     @Column(name = "modified_date")
@@ -55,13 +53,7 @@ public class Order {
         this.user = user;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
+   
     
     public int getStatusId() {
         return statusId;
@@ -71,13 +63,7 @@ public class Order {
         this.statusId = statusId;
     }
 
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean isActive) {
-        this.isActive = isActive;
-    }
+   
 
     public LocalDateTime getCreatedDate() {
         return createdDate;

@@ -37,7 +37,7 @@ public class Address {
     @Column(name = "pincode")
     private String pincode;
 
-    @Column(name = "isactive")
+    @Column(name = "is_active")
     private boolean isActive;
 
     @Column(name = "created_date")
