@@ -1,6 +1,6 @@
 package com.zerp.bookmanagement.ServiceImpl;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +37,8 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     orderDetails.setOrder(order);
     orderDetails.setBook(book.get());
     orderDetails.setActive(true);
-    orderDetails.setCreatedDate(LocalDate.now());
-    orderDetails.setModifiedDate(LocalDate.now());
+    orderDetails.setCreatedDate(LocalDateTime.now());
+    orderDetails.setModifiedDate(LocalDateTime.now());
     orderDetailsRepository.save(orderDetails);
 
   }
@@ -51,9 +51,9 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
       orderDetails.setOrder(order);
       Book book = cart1.getBook();
       orderDetails.setBook(book);
-      orderDetails.setCreatedDate(LocalDate.now());
+      orderDetails.setCreatedDate(LocalDateTime.now());
       orderDetails.setActive(true);
-      orderDetails.setModifiedDate(LocalDate.now());
+      orderDetails.setModifiedDate(LocalDateTime.now());
       orderDetailsRepository.save(orderDetails);
     }
 

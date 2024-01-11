@@ -1,6 +1,7 @@
 package com.zerp.bookmanagement.ServiceImpl;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +18,8 @@ public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
 
     public Book saveBook(Book book) {
-        book.setCreatedDate(LocalDate.now());
-        book.setModifiedDate(LocalDate.now());
-        book.setActive(true);
+        book.setCreatedDate(LocalDateTime.now());
+        book.setModifiedDate(LocalDateTime.now());
         return bookRepository.save(book);
     }
 

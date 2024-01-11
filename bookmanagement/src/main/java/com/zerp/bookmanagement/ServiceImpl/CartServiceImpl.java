@@ -1,6 +1,6 @@
 package com.zerp.bookmanagement.ServiceImpl;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,8 @@ public class CartServiceImpl implements CartService {
     public void addUser(User user) {
         Cart cart = new Cart();
         cart.setUserId(user);
-        cart.setCreatedDate(LocalDate.now());
-        cart.setModifiedDate(LocalDate.now());
+        cart.setCreatedDate(LocalDateTime.now());
+        cart.setModifiedDate(LocalDateTime.now());
         cart.setActive(true);
         cartRepository.save(cart);
 

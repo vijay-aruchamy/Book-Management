@@ -1,6 +1,6 @@
 package com.zerp.bookmanagement.ServiceImpl;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -41,8 +41,8 @@ public class CartDetailsServiceImpl implements CartDetailsService {
     Optional<Book> book = bookServiceImpl.findBookById(data.get("bookId"));
     cartDetails.setBook(book.get());
     cartDetails.setCart(cart);
-    cartDetails.setCreatedDate(LocalDate.now());
-    cartDetails.setModifiedDate(LocalDate.now());
+    cartDetails.setCreatedDate(LocalDateTime.now());
+    cartDetails.setModifiedDate(LocalDateTime.now());
     cartDetailsRepository.save(cartDetails);
   }
 

@@ -1,6 +1,6 @@
 package com.zerp.bookmanagement.Model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 //import org.springframework.data.annotation.Id;
 
@@ -34,10 +34,10 @@ public class Book {
     private boolean isActive;
 
     @Column(name = "created_date")
-    private LocalDate createdDate;
+    private LocalDateTime createdDate;
 
     @Column(name = "modified_date")
-    private LocalDate modifiedDate;
+    private LocalDateTime modifiedDate;
 
     @Column(name = "quantity")
     private int Quantity;
@@ -90,19 +90,19 @@ public class Book {
         this.isActive = isActive;
     }
 
-    public LocalDate getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
     }
 
-    public void setCreatedDate(LocalDate createdDate) {
+    public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
 
-    public LocalDate getModifiedDate() {
+    public LocalDateTime getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(LocalDate modifiedDate) {
+    public void setModifiedDate(LocalDateTime modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 
