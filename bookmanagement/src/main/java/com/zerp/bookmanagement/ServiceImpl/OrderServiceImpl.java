@@ -59,9 +59,9 @@ public class OrderServiceImpl implements OrderService {
 
   }
 
-  public void orderConform(Long orderId) {
-    Optional<Order> order = orderRepository.findById(orderId);
-    order.get().setStatusId(2);
-    orderRepository.save(order.get());
-  }
+  // public void orderConform(Long orderId) {
+  //   Optional<Order> order = orderRepository.findById(orderId);
+  //   order.get().setStatusId(2);
+  //   orderRepository.save(order.get());
+  // }
 }

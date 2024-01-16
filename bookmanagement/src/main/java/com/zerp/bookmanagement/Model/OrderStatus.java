@@ -15,7 +15,7 @@ public class OrderStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "status_id")
-    private Long statusId;
+    private int statusId;
 
     @Column(name = "status")
     private String status;
@@ -29,11 +29,11 @@ public class OrderStatus {
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
 
-    public Long getStatusId() {
+    public int getStatusId() {
         return statusId;
     }
 
-    public void setStatusId(Long statusId) {
+    public void setStatusId(int statusId) {
         this.statusId = statusId;
     }
 

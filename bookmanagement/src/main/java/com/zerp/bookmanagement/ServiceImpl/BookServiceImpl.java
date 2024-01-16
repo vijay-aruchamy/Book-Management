@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.zerp.bookmanagement.Model.Book;
@@ -17,9 +18,16 @@ public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
 
     public Book saveBook(Book book) {
+        try
+        {
         book.setCreatedDate(LocalDateTime.now());
         book.setModifiedDate(LocalDateTime.now());
         return bookRepository.save(book);
+        }
+        catch(Exception e)
+        {
+            throw new DataIntegrityViolationException("Data is repeated");
+        }
     }
 
     public List<Book> getAllBooks() {
@@ -35,7 +43,10 @@ public class BookServiceImpl implements BookService {
     }
 
     public Optional<Book> findBookById(Long long1) {
+        if(long1!=null)
         return bookRepository.findById(long1);
+        else
+        return null;
     }
 
 }

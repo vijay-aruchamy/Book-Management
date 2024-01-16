@@ -14,7 +14,7 @@ import com.zerp.bookmanagement.Model.CartDetails;
 import com.zerp.bookmanagement.Model.Order;
 import com.zerp.bookmanagement.Model.OrderDetails;
 import com.zerp.bookmanagement.Repository.CartDetailsRepository;
-import com.zerp.bookmanagement.Repository.CartRepository;
+import com.zerp.bookmanagement.Repository.CartRepository;      
 import com.zerp.bookmanagement.Repository.OrderDetailsRepository;
 import com.zerp.bookmanagement.Repository.OrderRepository;
 import com.zerp.bookmanagement.Service.OrderDetailsService;
@@ -36,6 +36,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     OrderDetails orderDetails = new OrderDetails();
     orderDetails.setOrder(order);
     orderDetails.setBook(book.get());
+    book.get().setQuantity(book.get().getQuantity()-1);
     orderDetails.setCreatedDate(LocalDateTime.now());
     orderDetails.setModifiedDate(LocalDateTime.now());
     orderDetailsRepository.save(orderDetails);
@@ -50,6 +51,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
       orderDetails.setOrder(order);
       Book book = cart1.getBook();
      int bookQuantity= book.getQuantity();
+       
       orderDetails.setBook(book);
       orderDetails.setCreatedDate(LocalDateTime.now());
       orderDetails.setModifiedDate(LocalDateTime.now());

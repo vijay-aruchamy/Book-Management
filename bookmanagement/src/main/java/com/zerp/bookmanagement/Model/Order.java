@@ -1,8 +1,6 @@
 package com.zerp.bookmanagement.Model;
 
 import java.time.LocalDateTime;
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,11 +23,66 @@ public class Order {
     private User user;
      
 
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private OrderStatus statusId;
 
-    @Column(name = "status_id",columnDefinition = "VARCHAR(255) DEFAULT '1'")
-    private int statusId;
+    @Column(name = "address_line1")
+    private String addressLine1;
+
+    @Column(name = "address_line2")
+    private String addressLine2;
+
+    @Column(name = "district")
+    private String district;
+
+    @Column(name = "state")
+    private String state;
+
+    @Column(name = "pincode")
+    private String pincode;
 
 
+
+    public String getAddressLine1() {
+        return addressLine1;
+    }
+
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
+    }
+
+    public String getAddressLine2() {
+        return addressLine2;
+    }
+
+    public void setAddressLine2(String addressLine2) {
+        this.addressLine2 = addressLine2;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
+    }
 
     @Column(name = "ordered_date")
     private LocalDateTime createdDate;
@@ -55,11 +108,11 @@ public class Order {
 
    
     
-    public int getStatusId() {
+    public OrderStatus getStatusId() {
         return statusId;
     }
 
-    public void setStatusId(int statusId) {
+    public void setStatusId(OrderStatus statusId) {
         this.statusId = statusId;
     }
 

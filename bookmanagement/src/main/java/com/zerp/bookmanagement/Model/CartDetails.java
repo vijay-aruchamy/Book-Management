@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -14,9 +12,18 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "cart_details")
 public class CartDetails {
+ 
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     @ManyToOne
     @JoinColumn(name = "cart_id")
@@ -45,14 +52,7 @@ public class CartDetails {
         Quantity = quantity;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+   
     public Cart getCart() {
         return cart;
     }

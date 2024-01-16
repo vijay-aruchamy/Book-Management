@@ -44,7 +44,7 @@ public class OrderController {
     @GetMapping("/conform")
     public ResponseEntity<String> getMethodName(@RequestBody Order order) {
         System.out.println(order.getOrderId());
-        orderServiceImpl.orderConform(order.getOrderId());
+        // orderServiceImpl.orderConform(order.getOrderId());
         return ResponseEntity.ok("Conformed");
     }
 
