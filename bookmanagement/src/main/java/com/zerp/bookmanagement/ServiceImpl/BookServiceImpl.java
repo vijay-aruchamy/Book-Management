@@ -31,7 +31,12 @@ public class BookServiceImpl implements BookService {
     }
 
     public List<Book> getAllBooks() {
-        return bookRepository.findAll();
+        try {
+            return bookRepository.findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error while retrieving books", e);
+        }
     }
 
     public List<Book> findByAuthor(String author) {

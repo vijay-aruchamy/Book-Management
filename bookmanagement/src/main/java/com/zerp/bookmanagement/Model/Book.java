@@ -1,14 +1,14 @@
 package com.zerp.bookmanagement.Model;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
-//import org.springframework.data.annotation.Id;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-//import jakarta.persistence.Id;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -19,7 +19,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
-    private Long id;
+    private BigInteger id;
 
     @Column(name = "book_name")
     private String bookName;
@@ -39,7 +39,7 @@ public class Book {
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
 
-    @Column(name = "quantity")
+    @Column(name = "Quantity")
     private int Quantity;
 
     public int getQuantity() {
@@ -50,11 +50,11 @@ public class Book {
         Quantity = quantity;
     }
 
-    public Long getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
