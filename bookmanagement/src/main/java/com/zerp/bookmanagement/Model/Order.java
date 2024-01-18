@@ -1,6 +1,7 @@
 package com.zerp.bookmanagement.Model;
 
 import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,7 +43,17 @@ public class Order {
     @Column(name = "pincode")
     private String pincode;
 
+    @Column(name ="total")
+    private long total;
 
+
+    public long getTotal() {
+        return total;
+    }
+
+    public void setTotal(long total) {
+        this.total = total;
+    }
 
     public String getAddressLine1() {
         return addressLine1;

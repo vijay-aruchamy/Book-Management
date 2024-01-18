@@ -5,12 +5,11 @@ import org.springframework.stereotype.Repository;
 
 import com.zerp.bookmanagement.Model.Book;
 
-import java.math.BigInteger;
 import java.util.List;
 
 
 @Repository
-public interface BookRepository extends JpaRepository<Book, BigInteger> {
+public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findByAuthor(String author);
 

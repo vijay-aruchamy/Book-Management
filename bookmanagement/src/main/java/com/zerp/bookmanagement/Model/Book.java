@@ -1,6 +1,5 @@
 package com.zerp.bookmanagement.Model;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 
@@ -19,7 +18,7 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
-    private BigInteger id;
+    private Long id;
 
     @Column(name = "book_name")
     private String bookName;
@@ -50,11 +49,11 @@ public class Book {
         Quantity = quantity;
     }
 
-    public BigInteger getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(BigInteger id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 
 @JavaBean
 @Entity
-@Table(name = "carts")
+@Table(name = "cart")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

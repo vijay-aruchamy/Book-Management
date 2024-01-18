@@ -18,14 +18,11 @@ public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
 
     public Book saveBook(Book book) {
-        try
-        {
-        book.setCreatedDate(LocalDateTime.now());
-        book.setModifiedDate(LocalDateTime.now());
-        return bookRepository.save(book);
-        }
-        catch(Exception e)
-        {
+        try {
+            book.setCreatedDate(LocalDateTime.now());
+            book.setModifiedDate(LocalDateTime.now());
+            return bookRepository.save(book);
+        } catch (Exception e) {
             throw new DataIntegrityViolationException("Data is repeated");
         }
     }
@@ -48,10 +45,10 @@ public class BookServiceImpl implements BookService {
     }
 
     public Optional<Book> findBookById(Long long1) {
-        if(long1!=null)
-        return bookRepository.findById(long1);
+        if (long1 != null)
+            return bookRepository.findById(long1);
         else
-        return null;
+            return null;
     }
 
 }

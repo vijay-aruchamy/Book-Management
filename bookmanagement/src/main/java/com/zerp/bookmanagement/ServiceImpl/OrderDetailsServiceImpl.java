@@ -14,7 +14,7 @@ import com.zerp.bookmanagement.Model.CartDetails;
 import com.zerp.bookmanagement.Model.Order;
 import com.zerp.bookmanagement.Model.OrderDetails;
 import com.zerp.bookmanagement.Repository.CartDetailsRepository;
-import com.zerp.bookmanagement.Repository.CartRepository;      
+import com.zerp.bookmanagement.Repository.CartRepository;
 import com.zerp.bookmanagement.Repository.OrderDetailsRepository;
 import com.zerp.bookmanagement.Repository.OrderRepository;
 import com.zerp.bookmanagement.Service.OrderDetailsService;
@@ -36,7 +36,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     OrderDetails orderDetails = new OrderDetails();
     orderDetails.setOrder(order);
     orderDetails.setBook(book.get());
-    book.get().setQuantity(book.get().getQuantity()-1);
+    book.get().setQuantity(book.get().getQuantity() - 1);
     orderDetails.setCreatedDate(LocalDateTime.now());
     orderDetails.setModifiedDate(LocalDateTime.now());
     orderDetailsRepository.save(orderDetails);
@@ -50,8 +50,8 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
       OrderDetails orderDetails = new OrderDetails();
       orderDetails.setOrder(order);
       Book book = cart1.getBook();
-     int bookQuantity= book.getQuantity();
-       
+      int bookQuantity = book.getQuantity();
+
       orderDetails.setBook(book);
       orderDetails.setCreatedDate(LocalDateTime.now());
       orderDetails.setModifiedDate(LocalDateTime.now());
@@ -67,9 +67,9 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     List<OrderDetails> orderDetails = orderDetailsRepository.findByOrder(order1.get());
     double total = 0;
     for (OrderDetails items : orderDetails) {
-        Book book = items.getBook();
-        data.put(book.getBookName(), book.getPrice());
-        total += book.getPrice();
+      Book book = items.getBook();
+      data.put(book.getBookName(), book.getPrice());
+      total += book.getPrice();
     }
     data.put("total", total);
     return data;

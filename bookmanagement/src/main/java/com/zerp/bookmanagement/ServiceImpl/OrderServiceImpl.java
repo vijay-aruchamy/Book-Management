@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import com.zerp.bookmanagement.Model.Book;
 import com.zerp.bookmanagement.Model.Cart;
 import com.zerp.bookmanagement.Model.Order;
+import com.zerp.bookmanagement.Model.OrderStatus;
 import com.zerp.bookmanagement.Model.User;
 import com.zerp.bookmanagement.Repository.BookRepository;
 import com.zerp.bookmanagement.Repository.CartRepository;
 import com.zerp.bookmanagement.Repository.OrderRepository;
+import com.zerp.bookmanagement.Repository.OrderStatusRepository;
 import com.zerp.bookmanagement.Repository.UserRepository;
 import com.zerp.bookmanagement.Service.OrderService;
 
@@ -34,6 +36,9 @@ public class OrderServiceImpl implements OrderService {
   @Autowired
   private OrderDetailsServiceImpl orderDetailsServiceImpl;
 
+  @Autowired
+  private OrderStatusRepository orderStatusRepository;
+
   public void orderPlace(Map<String, Long> data) {
     Order order = new Order();
 
@@ -42,6 +47,8 @@ public class OrderServiceImpl implements OrderService {
     order.setCreatedDate(LocalDateTime.now());
     order.setModifiedDate(LocalDateTime.now());
     order.setUser(user);
+    Optional<OrderStatus> status = orderStatusRepository.findById(1);
+    order.setStatusId(status.get());
     orderRepository.save(order);
     orderDetailsServiceImpl.createOrder(order, book);
 
@@ -51,17 +58,24 @@ public class OrderServiceImpl implements OrderService {
     User user = userRepository.findByUserId(userId);
     Cart cart = cartRepository.findCartIdByuser(user);
     Order order = new Order();
+    Optional<OrderStatus> status = orderStatusRepository.findById(1);
+    order.setStatusId(status.get());
     order.setUser(user);
     order.setCreatedDate(LocalDateTime.now());
     order.setModifiedDate(LocalDateTime.now());
-    orderRepository.save(order);
+    try {
+      orderRepository.save(order);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     orderDetailsServiceImpl.createCartOrder(order, cart);
 
   }
 
-  // public void orderConform(Long orderId) {
-  //   Optional<Order> order = orderRepository.findById(orderId);
-  //   order.get().setStatusId(2);
-  //   orderRepository.save(order.get());
-  // }
+  public void orderConform(Long orderId) {
+    Optional<Order> order = orderRepository.findById(orderId);
+    Optional<OrderStatus> status = orderStatusRepository.findById(2);
+    order.get().setStatusId(status.get());
+    orderRepository.save(order.get());
+  }
 }
