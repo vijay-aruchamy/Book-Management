@@ -35,15 +35,24 @@ public class CartDetailsServiceImpl implements CartDetailsService {
 
   public void addCart(Map<String, Long> data) {
     User user = userRepository.findByUserId(data.get("userId"));
-
-    CartDetails cartDetails = new CartDetails();
     Cart cart = cartRepository.findCartIdByuser(user);
     Optional<Book> book = bookServiceImpl.findBookById(data.get("bookId"));
-    cartDetails.setBook(book.get());
-    cartDetails.setCart(cart);
-    cartDetails.setCreatedDate(LocalDateTime.now());
-    cartDetails.setModifiedDate(LocalDateTime.now());
-    cartDetailsRepository.save(cartDetails);
+    CartDetails existingCartDetails = cartDetailsRepository.findByCartAndBook(cart, book);
+    if (existingCartDetails != null) {
+      existingCartDetails.setQuantity(existingCartDetails.getQuantity() + 1);
+      existingCartDetails.setPrice(existingCartDetails.getQuantity() * book.get().getPrice());
+      existingCartDetails.setModifiedDate(LocalDateTime.now());
+      cartDetailsRepository.save(existingCartDetails);
+    } else {
+      CartDetails cartDetails = new CartDetails();
+      cartDetails.setBook(book.get());
+      cartDetails.setCart(cart);
+      cartDetails.setQuantity(1);
+      cartDetails.setPrice(book.get().getPrice());
+      cartDetails.setCreatedDate(LocalDateTime.now());
+      cartDetails.setModifiedDate(LocalDateTime.now());
+      cartDetailsRepository.save(cartDetails);
+    }
   }
 
   public List<CartDetails> getCartDetails(Long userId) {
@@ -55,15 +64,5 @@ public class CartDetailsServiceImpl implements CartDetailsService {
 
   }
 
-  // public void updateCart(Long userId, Long bookId) {
-  // System.out.println(bookId);
-  // Optional<Book> book = bookRepository.findById(bookId);
-  // Optional<User> user = userRepository.findById(userId);
-  // Cart cart = cartRepository.findCartIdByuser(user.get());
-  // List<CartDetails> cartDetails = cartDetailsRepository.findByCart(cart);
-  // for (CartDetails items : cartDetails) {
-  // items.;
-  // }
-  // }
 
 }

@@ -44,6 +44,17 @@ public class CartDetails {
     @Column(name = "quantity")
     private int Quantity;
 
+    @Column(name="price")
+     private double price;
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     public int getQuantity() {
         return Quantity;
     }

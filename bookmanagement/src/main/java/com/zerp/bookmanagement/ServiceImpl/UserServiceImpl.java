@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService {
             cartService.addUser(user);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("user already exists");
         }
         return user;
     }
