@@ -34,7 +34,7 @@ public class OrderController {
     }
 
     @PostMapping("/cartOrder")
-    public ResponseEntity<String> cartOrder(@RequestBody User user) {
+    public ResponseEntity<String> cartOrder(@RequestBody User user) throws Exception {
 
         orderServiceImpl.cartOrderPlace(user.getUserId());
         return ResponseEntity.ok("ok");

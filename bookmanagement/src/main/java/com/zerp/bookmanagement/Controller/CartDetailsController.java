@@ -24,7 +24,7 @@ public class CartDetailsController {
     CartDetailsServiceImpl cartDetailsService;
 
     @PostMapping("/addCart")
-    public ResponseEntity<String> getMethodName(@RequestBody Map<String, Long> data) {
+    public ResponseEntity<String> getMethodName(@RequestBody Map<String, Long> data) throws Exception {
         cartDetailsService.addCart(data);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("added to the cart");

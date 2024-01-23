@@ -3,11 +3,14 @@ package com.zerp.bookmanagement.ServiceImpl;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.zerp.bookmanagement.Model.User;
 import com.zerp.bookmanagement.Repository.UserRepository;
 import com.zerp.bookmanagement.Service.UserService;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,6 +21,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private CartServiceImpl cartService;
 
+    @Transactional
     public User addUser(User user) {
         if (user.getUserName() == null || user.getPassword() == null) {
             throw new IllegalArgumentException("Username or password cannot be null");
@@ -25,7 +29,8 @@ public class UserServiceImpl implements UserService {
         try {
             user = userRepository.save(user);
             cartService.addUser(user);
-        } catch (Exception e) {
+        } catch (DataAccessException  e) {
+            
             e.printStackTrace();
         }
         return user;

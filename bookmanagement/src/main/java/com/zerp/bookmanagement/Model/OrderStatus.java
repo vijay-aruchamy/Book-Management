@@ -2,12 +2,16 @@ package com.zerp.bookmanagement.Model;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 @Table(name = "order_status")
@@ -23,9 +27,13 @@ public class OrderStatus {
     @Column(name = "is_active")
     private boolean isActive;
 
+     @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_date")
     private LocalDateTime createdDate;
 
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
 

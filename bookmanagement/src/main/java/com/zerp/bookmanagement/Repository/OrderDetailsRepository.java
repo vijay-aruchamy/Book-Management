@@ -16,4 +16,5 @@ public interface OrderDetailsRepository extends JpaRepository<OrderDetails, Long
     // You can add custom queries or methods specific to OrderDetails if needed
 
     List<Book> findBookById(Long id);
+
 }

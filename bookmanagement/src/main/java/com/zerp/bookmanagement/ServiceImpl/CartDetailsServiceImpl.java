@@ -33,18 +33,31 @@ public class CartDetailsServiceImpl implements CartDetailsService {
   @Autowired
   BookRepository bookRepository;
 
-  public void addCart(Map<String, Long> data) {
-    User user = userRepository.findByUserId(data.get("userId"));
-    Cart cart = cartRepository.findCartIdByuser(user);
+  public void addCart(Map<String, Long> data) throws Exception {
+   Optional<User> user = userRepository.findByUserId(data.get("userId"));
+    Cart cart = cartRepository.findCartIdByuser(user.get());
     Optional<Book> book = bookServiceImpl.findBookById(data.get("bookId"));
     CartDetails existingCartDetails = cartDetailsRepository.findByCartAndBook(cart, book);
     if (existingCartDetails != null) {
+      if(existingCartDetails.getQuantity()>book.get().getQuantity())
+      {
+       throw new Exception("the book's quantity is not sufficient");
+      }
+      else
+      {
       existingCartDetails.setQuantity(existingCartDetails.getQuantity() + 1);
       existingCartDetails.setPrice(existingCartDetails.getQuantity() * book.get().getPrice());
       existingCartDetails.setModifiedDate(LocalDateTime.now());
       cartDetailsRepository.save(existingCartDetails);
+      }
     } else {
       CartDetails cartDetails = new CartDetails();
+      if(cartDetails.getQuantity()>book.get().getQuantity())
+      {
+       throw new Exception("the book's quantity is not sufficient");
+      }
+      else
+      {
       cartDetails.setBook(book.get());
       cartDetails.setCart(cart);
       cartDetails.setQuantity(1);
@@ -52,17 +65,17 @@ public class CartDetailsServiceImpl implements CartDetailsService {
       cartDetails.setCreatedDate(LocalDateTime.now());
       cartDetails.setModifiedDate(LocalDateTime.now());
       cartDetailsRepository.save(cartDetails);
+      }
     }
   }
 
   public List<CartDetails> getCartDetails(Long userId) {
-    User user = userRepository.findByUserId(userId);
-    Cart cart = cartRepository.findCartIdByuser(user);
+    Optional<User> user = userRepository.findByUserId(userId);
+    Cart cart = cartRepository.findCartIdByuser(user.get());
     if (cartDetailsRepository.findByCart(cart) != null)
       return cartDetailsRepository.findByCart(cart);
     return null;
 
   }
-
 
 }

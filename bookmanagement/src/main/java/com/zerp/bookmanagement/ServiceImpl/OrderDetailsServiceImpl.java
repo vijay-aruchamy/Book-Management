@@ -13,7 +13,7 @@ import com.zerp.bookmanagement.Model.Cart;
 import com.zerp.bookmanagement.Model.CartDetails;
 import com.zerp.bookmanagement.Model.Order;
 import com.zerp.bookmanagement.Model.OrderDetails;
-import com.zerp.bookmanagement.Repository.CartDetailsRepository;       
+import com.zerp.bookmanagement.Repository.CartDetailsRepository;
 import com.zerp.bookmanagement.Repository.CartRepository;
 import com.zerp.bookmanagement.Repository.OrderDetailsRepository;
 import com.zerp.bookmanagement.Repository.OrderRepository;
@@ -34,26 +34,27 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     OrderDetails orderDetails = new OrderDetails();
     orderDetails.setOrder(order);
     orderDetails.setBook(book.get());
-    book.get().setQuantity(book.get().getQuantity() - 1);
     orderDetails.setCreatedDate(LocalDateTime.now());
     orderDetails.setModifiedDate(LocalDateTime.now());
     orderDetailsRepository.save(orderDetails);
 
   }
 
-  public void createCartOrder(Order order, Cart cart) {
+  public void createCartOrder(Order order, Cart cart) throws Exception {
 
     List<CartDetails> cartDetails = cartDetailsRepository.findByCart(cart);
     for (CartDetails cart1 : cartDetails) {
       OrderDetails orderDetails = new OrderDetails();
       orderDetails.setOrder(order);
       Book book = cart1.getBook();
-      int bookQuantity = book.getQuantity();
-
-      orderDetails.setBook(book);
-      orderDetails.setCreatedDate(LocalDateTime.now());
-      orderDetails.setModifiedDate(LocalDateTime.now());
-      orderDetailsRepository.save(orderDetails);
+      if (book.getQuantity() > cart1.getQuantity()) {
+        orderDetails.setBook(book);
+        orderDetails.setQuantity(cart1.getQuantity());
+        orderDetails.setCreatedDate(LocalDateTime.now());
+        orderDetails.setModifiedDate(LocalDateTime.now());
+        orderDetailsRepository.save(orderDetails);
+      } else
+        throw new Exception("The required amount of book is out of stock");
     }
 
   }
@@ -73,4 +74,17 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     return data;
 
   }
+
+  public void orderConform(Order order) {
+    List<OrderDetails> orderDetails = orderDetailsRepository.findByOrder(order);
+
+    for (OrderDetails orderDetails2 : orderDetails) {
+      Book book = orderDetails2.getBook();
+      int quantity = orderDetails2.getQuantity();
+      int bookQuantity = book.getQuantity();
+      book.setQuantity(bookQuantity - quantity);
+
+    }
+  }
+
 }
