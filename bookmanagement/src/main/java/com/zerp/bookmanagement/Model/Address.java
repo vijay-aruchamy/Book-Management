@@ -22,7 +22,7 @@ public class Address {
     @JoinColumn(name = "user_id")
     private User user;
 
-    // @Column(name = "address_line1")
+     @Column(name = "address_line1")
     private String addressLine1;
 
     @Column(name = "address_line2")
@@ -58,11 +58,11 @@ public class Address {
         this.addressId = addressId;
     }
 
-    public User getUserId() {
+    public User getUser() {
         return user;
     }
 
-    public void setUserId(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

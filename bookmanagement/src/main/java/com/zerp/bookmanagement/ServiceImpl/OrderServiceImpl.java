@@ -65,10 +65,10 @@ public class OrderServiceImpl implements OrderService {
     order.setModifiedDate(LocalDateTime.now());
     try {
       orderRepository.save(order);
+      orderDetailsServiceImpl.createCartOrder(order, cart);
     } catch (Exception e) {
       e.printStackTrace();
     }
-    orderDetailsServiceImpl.createCartOrder(order, cart);
 
   }
 

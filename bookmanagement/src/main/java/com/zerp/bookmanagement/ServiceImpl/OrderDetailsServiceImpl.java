@@ -14,19 +14,16 @@ import com.zerp.bookmanagement.Model.CartDetails;
 import com.zerp.bookmanagement.Model.Order;
 import com.zerp.bookmanagement.Model.OrderDetails;
 import com.zerp.bookmanagement.Repository.CartDetailsRepository;
-import com.zerp.bookmanagement.Repository.CartRepository;
 import com.zerp.bookmanagement.Repository.OrderDetailsRepository;
 import com.zerp.bookmanagement.Repository.OrderRepository;
 import com.zerp.bookmanagement.Service.OrderDetailsService;
-
+  
 @Service
 public class OrderDetailsServiceImpl implements OrderDetailsService {
   @Autowired
   private OrderDetailsRepository orderDetailsRepository;
   @Autowired
   private CartDetailsRepository cartDetailsRepository;
-  @Autowired
-  CartRepository cartRepository;
   @Autowired
   private OrderRepository orderRepository;
 
