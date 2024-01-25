@@ -13,10 +13,13 @@ import com.zerp.bookmanagement.Model.Cart;
 import com.zerp.bookmanagement.Model.CartDetails;
 import com.zerp.bookmanagement.Model.Order;
 import com.zerp.bookmanagement.Model.OrderDetails;
+import com.zerp.bookmanagement.Repository.BookRepository;
 import com.zerp.bookmanagement.Repository.CartDetailsRepository;
 import com.zerp.bookmanagement.Repository.OrderDetailsRepository;
 import com.zerp.bookmanagement.Repository.OrderRepository;
 import com.zerp.bookmanagement.Service.OrderDetailsService;
+
+import jakarta.transaction.Transactional;
   
 @Service
 public class OrderDetailsServiceImpl implements OrderDetailsService {
@@ -26,6 +29,8 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
   private CartDetailsRepository cartDetailsRepository;
   @Autowired
   private OrderRepository orderRepository;
+  @Autowired
+  private BookRepository bookRepository;
 
   public void createOrder(Order order, Optional<Book> book) {
     OrderDetails orderDetails = new OrderDetails();
@@ -37,6 +42,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
   }
 
+  @Transactional
   public void createCartOrder(Order order, Cart cart) throws Exception {
 
     List<CartDetails> cartDetails = cartDetailsRepository.findByCart(cart);
@@ -74,13 +80,12 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
   public void orderConform(Order order) {
     List<OrderDetails> orderDetails = orderDetailsRepository.findByOrder(order);
-
     for (OrderDetails orderDetails2 : orderDetails) {
       Book book = orderDetails2.getBook();
       int quantity = orderDetails2.getQuantity();
       int bookQuantity = book.getQuantity();
       book.setQuantity(bookQuantity - quantity);
-
+      bookRepository.save(book);
     }
   }
 
