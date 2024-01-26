@@ -1,4 +1,4 @@
-package com.zerp.bookmanagement.Controller;
+package com.zerp.bookmanagement.controller;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -7,47 +7,33 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zerp.bookmanagement.Model.User;
-import com.zerp.bookmanagement.ServiceImpl.UserServiceImpl;
+import com.zerp.bookmanagement.model.User;
+import com.zerp.bookmanagement.service.impl.UserServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
-
-
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
     @Autowired
     private UserServiceImpl userService;
- 
-    
-    
 
-    @PostMapping("/adduser")
+    @PostMapping("/add")
     public ResponseEntity<User> addUser(@RequestBody User user) {
-        User savedUser =userService.addUser(user);
+        User savedUser = userService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
-
     }
 
-
-    
     @PostMapping("/login")
-    public String login(@RequestBody User user)
-    {
-      return   userService.loginCheck(user);
-         
+    public String login(@RequestBody User user) {
+        return userService.loginCheck(user);
     }
 
-
-    @GetMapping("/getuser")
-    public ResponseEntity<Optional<User>> getUser(@RequestParam("userId") Long userId)
-    {
-      return ResponseEntity.ok(userService.findUserById(userId));
+    @GetMapping("/get")
+    public ResponseEntity<Optional<User>> getUser(@RequestParam("userId") Long userId) {
+        return ResponseEntity.ok(userService.findUserById(userId));
     }
-    
 }
