@@ -32,10 +32,10 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
   @Autowired
   private BookRepository bookRepository;
 
-  public void createOrder(Order order, Optional<Book> book) {
+  public void createOrder(Order order, Book book) {
     OrderDetails orderDetails = new OrderDetails();
     orderDetails.setOrder(order);
-    orderDetails.setBook(book.get());
+    orderDetails.setBook(book);
     orderDetails.setCreatedDate(LocalDateTime.now());
     orderDetails.setModifiedDate(LocalDateTime.now());
     orderDetailsRepository.save(orderDetails);

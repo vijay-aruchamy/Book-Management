@@ -13,6 +13,7 @@ import com.zerp.bookmanagement.Model.User;
 import com.zerp.bookmanagement.ServiceImpl.OrderDetailsServiceImpl;
 import com.zerp.bookmanagement.ServiceImpl.OrderServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
@@ -53,5 +54,15 @@ public class OrderController {
         return orderDetailsServiceImpl.checkoutProcess(order);
 
     }
+
+
+    // @GetMapping("orderAddress")
+    // public String saveOrderAddress(@RequestParam long addressId)
+    // {
+
+    //     orderServiceImpl.saveAddress(addressId);
+    //     return null;
+
+    // }
 
 }

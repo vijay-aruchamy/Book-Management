@@ -1,4 +1,4 @@
-package com.zerp.bookmanagement.controller;
+package com.zerp.bookmanagement.Controller;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -7,8 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zerp.bookmanagement.model.User;
-import com.zerp.bookmanagement.service.impl.UserServiceImpl;
+import com.zerp.bookmanagement.Model.User;
+import com.zerp.bookmanagement.ServiceImpl.UserServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
