@@ -22,37 +22,35 @@ public class AddressServiceImpl implements AddressService {
     private UserRepository userRepository;
 
     public Address saveAddress(Address address) throws NotFoundException {
-            if (address.getUser() != null && address.getUser().getUserId() != null) {
-                Long userId = address.getUser().getUserId();
-                Optional<User> userOptional = userRepository.findById(userId);
-    
-                if (userOptional.isPresent()) {
-                    User user = userOptional.get();
-                    address.setUser(user);
-                    address.setModifiedDate(LocalDateTime.now());
-                    address.setCreatedDate(LocalDateTime.now());
-                    address.setActive(true);
-                    addressRepository.save(address);
-    
-                    return address;
-                } else {
-                    throw new NotFoundException();
-                }
+        if (address.getUser() != null && address.getUser().getUserId() != null) {
+            Long userId = address.getUser().getUserId();
+            Optional<User> userOptional = userRepository.findById(userId);
+
+            if (userOptional.isPresent()) {
+                User user = userOptional.get();
+                address.setUser(user);
+                address.setModifiedDate(LocalDateTime.now());
+                address.setCreatedDate(LocalDateTime.now());
+                address.setActive(true);
+                addressRepository.save(address);
+
+                return address;
             } else {
-                throw new IllegalArgumentException("UserId cannot be null in the provided Address object.");
+                throw new NotFoundException();
             }
+        } else {
+            throw new IllegalArgumentException("UserId cannot be null in the provided Address object.");
         }
+    }
 
     public List<Address> showAddress(long userId) {
-          
-        Optional<User> user=userRepository.findById(userId);
-        if(user.isPresent())
-        {
-            List<Address> addresses= addressRepository.findByUser(user.get());
+
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            List<Address> addresses = addressRepository.findByUser(user.get());
             return addresses;
-        }
-        else
-        throw new NullPointerException();
-       
+        } else
+            throw new NullPointerException();
+
     }
 }

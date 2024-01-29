@@ -60,17 +60,25 @@ public class OrderServiceImpl implements OrderService {
     order.setModifiedDate(LocalDateTime.now());
     order.setUser(user.get());
     Optional<OrderStatus> status = orderStatusRepository.findById(1);
+    System.out.println(address.get().getAddressLine1());
     order.setStatusId(status.get());
     orderRepository.save(order);
     orderDetailsServiceImpl.createOrder(order, book.get());
 
   }
 
-  public void cartOrderPlace(Long userId) throws Exception {
-    Optional<User> user = userRepository.findByUserId(userId);
+  public void cartOrderPlace(Map<String, Long> data) throws Exception {
+    Optional<User> user = userRepository.findByUserId(data.get("userId"));
     Cart cart = cartRepository.findCartIdByuser(user.get());
     Order order = new Order();
     Optional<OrderStatus> status = orderStatusRepository.findById(1);
+    Optional<Address> address = addressRepository.findById(data.get("addressId"));
+    order.setAddressLine1(address.get().getAddressLine1());
+    order.setAddressLine2(address.get().getAddressLine1());
+    System.out.println(address.get().getAddressLine1());
+    order.setDistrict(address.get().getDistrict());
+    order.setState(address.get().getState());
+    order.setPincode(address.get().getPincode());
     order.setStatusId(status.get());
     order.setUser(user.get());
     order.setCreatedDate(LocalDateTime.now());
@@ -91,6 +99,5 @@ public class OrderServiceImpl implements OrderService {
     orderRepository.save(order.get());
     orderDetailsServiceImpl.orderConform(order.get());
   }
-
 
 }

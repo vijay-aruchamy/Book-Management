@@ -40,10 +40,11 @@ public class CartDetailsController {
     }
 
     // @PostMapping("/deleteBook")
-    // public ResponseEntity<String> deleteItem(@RequestBody Map<String, Long> data) {
-    //     cartDetailsService.updateCart(data.get("userId"), data.get("id"));
-    //     System.out.println(data.get("id"));
-    //     return ResponseEntity.ok("Deleted");
+    // public ResponseEntity<String> deleteItem(@RequestBody Map<String, Long> data)
+    // {
+    // cartDetailsService.updateCart(data.get("userId"), data.get("id"));
+    // System.out.println(data.get("id"));
+    // return ResponseEntity.ok("Deleted");
 
     // }
 

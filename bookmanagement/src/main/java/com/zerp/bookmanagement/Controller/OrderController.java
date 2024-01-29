@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zerp.bookmanagement.Model.Order;
-import com.zerp.bookmanagement.Model.User;
 import com.zerp.bookmanagement.ServiceImpl.OrderDetailsServiceImpl;
 import com.zerp.bookmanagement.ServiceImpl.OrderServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
@@ -35,9 +33,9 @@ public class OrderController {
     }
 
     @PostMapping("/cartOrder")
-    public ResponseEntity<String> cartOrder(@RequestBody User user) throws Exception {
+    public ResponseEntity<String> cartOrder(@RequestBody Map<String, Long> data) throws Exception {
 
-        orderServiceImpl.cartOrderPlace(user.getUserId());
+        orderServiceImpl.cartOrderPlace(data);
         return ResponseEntity.ok("ok");
 
     }
@@ -45,7 +43,7 @@ public class OrderController {
     @GetMapping("/conform")
     public ResponseEntity<String> getMethodName(@RequestBody Order order) {
         System.out.println(order.getOrderId());
-         orderServiceImpl.orderConform(order.getOrderId());
+        orderServiceImpl.orderConform(order.getOrderId());
         return ResponseEntity.ok("Conformed");
     }
 
@@ -55,13 +53,12 @@ public class OrderController {
 
     }
 
-
     // @GetMapping("orderAddress")
     // public String saveOrderAddress(@RequestParam long addressId)
     // {
 
-    //     orderServiceImpl.saveAddress(addressId);
-    //     return null;
+    // orderServiceImpl.saveAddress(addressId);
+    // return null;
 
     // }
 

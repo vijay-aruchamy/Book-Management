@@ -15,29 +15,24 @@ import com.zerp.bookmanagement.ServiceImpl.AddressServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @RestController
 @RequestMapping("/address")
 public class AddressController {
 
     @Autowired
     private AddressServiceImpl addressServiceImpl;
- 
 
     @PostMapping("/saveaddress")
-    public ResponseEntity<Address> saveAddress(@RequestBody Address address) throws NotFoundException
-    {
-       Address savedAddress= addressServiceImpl.saveAddress(address);
+    public ResponseEntity<Address> saveAddress(@RequestBody Address address) throws NotFoundException {
+        Address savedAddress = addressServiceImpl.saveAddress(address);
         return ResponseEntity.ok(savedAddress);
-        
-    }
 
+    }
 
     @GetMapping("/showAddress")
     public List<Address> showAddresses(@RequestParam long userId) {
-        return  addressServiceImpl.showAddress(userId);
-        
+        return addressServiceImpl.showAddress(userId);
+
     }
-    
-    
+
 }

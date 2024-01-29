@@ -10,8 +10,6 @@ import com.zerp.bookmanagement.Model.User;
 import com.zerp.bookmanagement.Repository.UserRepository;
 import com.zerp.bookmanagement.Service.UserService;
 
-import jakarta.transaction.Transactional;
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -21,7 +19,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private CartServiceImpl cartService;
 
-    @Transactional
     public User addUser(User user) {
         if (user.getUserName() == null || user.getPassword() == null) {
             throw new IllegalArgumentException("Username or password cannot be null");
@@ -29,8 +26,8 @@ public class UserServiceImpl implements UserService {
         try {
             user = userRepository.save(user);
             cartService.addUser(user);
-        } catch (DataAccessException  e) {
-            
+        } catch (DataAccessException e) {
+
             e.printStackTrace();
         }
         return user;
@@ -38,10 +35,10 @@ public class UserServiceImpl implements UserService {
 
     public String loginCheck(User user1) {
 
-        if (user1.getUserName() == null)
+        if (user1.getEmail() == null)
             return "Login UnSuccessful No User Found";
         else {
-            User user = userRepository.findByuserName(user1.getUserName());
+            User user = userRepository.findByEmail(user1.getEmail());
             if (user != null && user.getPassword().equals(user1.getPassword()))
                 return "Login Successful Welcome";
         }
