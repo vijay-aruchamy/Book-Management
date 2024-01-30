@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.zerp.bookmanagement.Model.Address;
 import com.zerp.bookmanagement.Model.Book;
 import com.zerp.bookmanagement.Model.Cart;
@@ -67,35 +66,49 @@ public class OrderServiceImpl implements OrderService {
 
   }
 
-  public void cartOrderPlace(Map<String, Long> data) throws Exception {
-    Optional<User> user = userRepository.findByUserId(data.get("userId"));
-    Cart cart = cartRepository.findCartIdByuser(user.get());
-    Order order = new Order();
-    Optional<OrderStatus> status = orderStatusRepository.findById(1);
-    Optional<Address> address = addressRepository.findById(data.get("addressId"));
-    order.setAddressLine1(address.get().getAddressLine1());
-    order.setAddressLine2(address.get().getAddressLine1());
-    System.out.println(address.get().getAddressLine1());
-    order.setDistrict(address.get().getDistrict());
-    order.setState(address.get().getState());
-    order.setPincode(address.get().getPincode());
-    order.setStatusId(status.get());
-    order.setUser(user.get());
-    order.setCreatedDate(LocalDateTime.now());
-    order.setModifiedDate(LocalDateTime.now());
+  public void cartOrderPlace(Map<String, Long> data) {
     try {
+      Optional<User> user = userRepository.findByUserId(data.get("userId"));
+      if (!user.isPresent()) {
+        System.err.println("User not found with ID: " + data.get("userId"));
+        return;
+      }
+      Cart cart = cartRepository.findCartIdByuser(user.get());
+      if (cart == null) {
+        System.err.println("Cart not found for user: " + user.get().getUserId());
+        return;
+      }
+      Order order = new Order();
+      Optional<OrderStatus> status = orderStatusRepository.findById(1);
+      Optional<Address> address = addressRepository.findById(data.get("addressId"));
+      order.setAddressLine1(address.get().getAddressLine1());
+      order.setAddressLine2(address.get().getAddressLine2());
+      System.out.println(address.get().getAddressLine1());
+      order.setDistrict(address.get().getDistrict());
+      order.setState(address.get().getState());
+      order.setPincode(address.get().getPincode());
+      order.setStatusId(status.get());
+      order.setUser(user.get());
+      order.setCreatedDate(LocalDateTime.now());
+      order.setModifiedDate(LocalDateTime.now());
       orderRepository.save(order);
       orderDetailsServiceImpl.createCartOrder(order, cart);
     } catch (Exception e) {
       e.printStackTrace();
     }
-
   }
+
+  
 
   public void orderConform(Long orderId) {
     Optional<Order> order = orderRepository.findById(orderId);
     Optional<OrderStatus> status = orderStatusRepository.findById(2);
     order.get().setStatusId(status.get());
+    try {
+      orderRepository.save(order.get());
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     orderRepository.save(order.get());
     orderDetailsServiceImpl.orderConform(order.get());
   }

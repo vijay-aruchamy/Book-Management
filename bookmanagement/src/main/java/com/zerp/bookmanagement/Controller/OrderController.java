@@ -13,9 +13,8 @@ import com.zerp.bookmanagement.ServiceImpl.OrderDetailsServiceImpl;
 import com.zerp.bookmanagement.ServiceImpl.OrderServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-
 @RestController
-@RequestMapping("/order")
+@RequestMapping("/orders")
 public class OrderController {
 
     @Autowired
@@ -24,33 +23,28 @@ public class OrderController {
     @Autowired
     OrderDetailsServiceImpl orderDetailsServiceImpl;
 
-    @PostMapping("/orderItem")
+    @PostMapping("/order-item")
     public ResponseEntity<String> orderProcess(@RequestBody Map<String, Long> data) {
-
         orderServiceImpl.orderPlace(data);
         return ResponseEntity.ok("ok");
-
     }
 
-    @PostMapping("/cartOrder")
+    @PostMapping("/cart-order")
     public ResponseEntity<String> cartOrder(@RequestBody Map<String, Long> data) throws Exception {
-
         orderServiceImpl.cartOrderPlace(data);
         return ResponseEntity.ok("ok");
-
     }
 
     @GetMapping("/conform")
-    public ResponseEntity<String> getMethodName(@RequestBody Order order) {
+    public ResponseEntity<String> confirmOrder(@RequestBody Order order) {
         System.out.println(order.getOrderId());
         orderServiceImpl.orderConform(order.getOrderId());
-        return ResponseEntity.ok("Conformed");
+        return ResponseEntity.ok("Confirmed");
     }
 
     @PostMapping("/checkout")
-    public Map<String, Double> checkOutProcess(@RequestBody Order order) {
+    public Map<String, Double> checkoutProcess(@RequestBody Order order) {
         return orderDetailsServiceImpl.checkoutProcess(order);
-
     }
 
     // @GetMapping("orderAddress")
@@ -61,5 +55,6 @@ public class OrderController {
     // return null;
 
     // }
+
 
 }

@@ -68,6 +68,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     double total = 0;
     for (OrderDetails items : orderDetails) {
       Book book = items.getBook();
+      data.put(book.getBookName()+"-Quantity",(double) items.getQuantity());
       data.put(book.getBookName(), book.getPrice()*items.getQuantity());
       total += book.getPrice()*items.getQuantity();
     }
@@ -75,6 +76,10 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     return data;
 
   }
+
+
+
+  
 
   public void orderConform(Order order) {
     List<OrderDetails> orderDetails = orderDetailsRepository.findByOrder(order);
