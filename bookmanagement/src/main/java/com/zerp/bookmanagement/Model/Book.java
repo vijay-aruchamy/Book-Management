@@ -17,6 +17,7 @@ import jakarta.persistence.TemporalType;
 @Table(name = "Book")
 public class Book {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")

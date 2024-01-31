@@ -27,13 +27,11 @@ public class OrderStatus {
     @Column(name = "is_active")
     private boolean isActive;
 
-     @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
+  
     @Column(name = "created_date")
     private LocalDateTime createdDate;
 
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
+   
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
 

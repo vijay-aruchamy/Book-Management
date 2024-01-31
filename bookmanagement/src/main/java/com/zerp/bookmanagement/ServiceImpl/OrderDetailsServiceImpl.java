@@ -34,7 +34,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     OrderDetails orderDetails = new OrderDetails();
     orderDetails.setOrder(order);
     orderDetails.setBook(book);
-    orderDetails.setCreatedDate(LocalDateTime.now());
+   orderDetails.setCreatedDate(LocalDateTime.now());
     orderDetails.setModifiedDate(LocalDateTime.now());
     orderDetailsRepository.save(orderDetails);
 
