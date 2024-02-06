@@ -77,10 +77,6 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
   }
 
-
-
-  
-
   public void orderConform(Order order) {
     List<OrderDetails> orderDetails = orderDetailsRepository.findByOrder(order);
     for (OrderDetails orderDetails2 : orderDetails) {

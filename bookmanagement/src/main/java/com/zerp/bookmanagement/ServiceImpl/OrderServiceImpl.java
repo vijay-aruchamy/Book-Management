@@ -47,9 +47,20 @@ public class OrderServiceImpl implements OrderService {
     Order order = new Order();
 
     Optional<User> user = userRepository.findByUserId(data.get("userId"));
+    if (!user.isPresent()) {
+      System.err.println("User not found with ID: " + data.get("userId"));
+      return;
+    }
     Optional<Book> book = bookRepository.findById(data.get("bookId"));
+    if (!book.isPresent()) {
+      System.err.println("book not found with ID: " + data.get("bookId"));
+      return;
+    }
     Optional<Address> address = addressRepository.findById(data.get("addressId"));
-    System.out.println(data.get("bookId"));
+    if (!address.isPresent()) {
+      System.err.println("Address not found with ID: " + data.get("addressId"));
+      return;
+    }
     order.setAddressLine1(address.get().getAddressLine1());
     order.setAddressLine2(address.get().getAddressLine1());
     order.setDistrict(address.get().getDistrict());
@@ -81,6 +92,10 @@ public class OrderServiceImpl implements OrderService {
       Order order = new Order();
       Optional<OrderStatus> status = orderStatusRepository.findById(1);
       Optional<Address> address = addressRepository.findById(data.get("addressId"));
+      if (!address.isPresent()) {
+        System.err.println("Address not found with ID: " + data.get("addressId"));
+        return;
+      }
       order.setAddressLine1(address.get().getAddressLine1());
       order.setAddressLine2(address.get().getAddressLine2());
       System.out.println(address.get().getAddressLine1());
