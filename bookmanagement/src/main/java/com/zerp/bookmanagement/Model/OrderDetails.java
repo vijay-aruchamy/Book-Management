@@ -32,26 +32,24 @@ public class OrderDetails {
     private Book book;
 
 
-     @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
+     
     @Column(name = "created_date")
     private LocalDateTime createdDate;
 
-    @UpdateTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
+
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
 
     
     @Column(name = "quantity")
-    private int Quantity;
+    private int quantity;
 
     public int getQuantity() {
-        return Quantity;
+        return quantity;
     }
 
     public void setQuantity(int quantity) {
-        Quantity = quantity;
+      this. quantity = quantity;
     }
 
 

@@ -26,6 +26,9 @@ public interface CartDetailsRepository extends JpaRepository<CartDetails, Long> 
 
 
     CartDetails findByCartAndBook(Cart cart, Optional<Book> book);
+
+
+   
 }
 
     

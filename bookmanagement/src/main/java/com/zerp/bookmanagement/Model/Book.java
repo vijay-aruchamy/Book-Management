@@ -46,7 +46,7 @@ public class Book {
     private LocalDateTime modifiedDate;
 
 
-    @Column(name = "Quantity")
+    @Column(name = "quantity")
     private int Quantity;
 
     public int getQuantity() {
