@@ -22,14 +22,14 @@ public class AddressController {
     @Autowired
     private AddressServiceImpl addressServiceImpl;
 
-    @PostMapping("/saveaddress")
+    @PostMapping
     public ResponseEntity<Address> saveAddress(@RequestBody Address address) throws NotFoundException {
         Address savedAddress = addressServiceImpl.saveAddress(address);
         return ResponseEntity.ok(savedAddress);
 
     }
 
-    @GetMapping("/showAddress")
+    @GetMapping
     public List<Address> showAddresses(@RequestParam long userId) {
         return addressServiceImpl.showAddress(userId);
 
