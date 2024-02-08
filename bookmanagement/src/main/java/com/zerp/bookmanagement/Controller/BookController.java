@@ -21,7 +21,7 @@ public class BookController {
     @Autowired
     private BookServiceImpl bookService;
 
-    @PostMapping("/addBook")
+    @PostMapping
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
 
         System.out.println(book.getBookName());
@@ -29,13 +29,13 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<Book>> getAllBooks() {
         List<Book> books = bookService.getAllBooks();
         return ResponseEntity.ok(books);
     }
 
-    @GetMapping("/byAuthor")
+    @GetMapping("/author")
     public ResponseEntity<List<Book>> getBooksByAuthor(@RequestParam("author") String author) {
         List<Book> books = bookService.findByAuthor(author);
         if (books.isEmpty()) {
@@ -44,7 +44,7 @@ public class BookController {
         return ResponseEntity.ok(books);
     }
 
-    @GetMapping("/byBookName")
+    @GetMapping("/bookName")
     public ResponseEntity<List<Book>> getBookBybookName(@RequestParam("bookName") String bookName) {
         List<Book> books = bookService.findByBookName(bookName);
         if (books.isEmpty()) {

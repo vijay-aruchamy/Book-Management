@@ -24,14 +24,14 @@ public class CartDetailsController {
     @Autowired
     CartDetailsServiceImpl cartDetailsService;
 
-    @PostMapping("/addCart")
+    @PostMapping
     public ResponseEntity<String> getMethodName(@RequestBody Map<String, Long> data) throws Exception {
         cartDetailsService.addCart(data);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("added to the cart");
     }
 
-    @GetMapping("/showCart")
+    @GetMapping
     public ResponseEntity<List<CartDetails>> showCart(@RequestBody Map<String, Long> data) {
 
         List<CartDetails> data1 = cartDetailsService.getCartDetails(data.get("userId"));

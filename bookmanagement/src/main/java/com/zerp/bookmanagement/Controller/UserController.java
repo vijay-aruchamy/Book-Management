@@ -20,7 +20,7 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    @PostMapping("/add")
+    @PostMapping
     public ResponseEntity<User> addUser(@RequestBody User user) {
         User savedUser = userService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
@@ -31,7 +31,7 @@ public class UserController {
         return userService.loginCheck(user);
     }
 
-    @GetMapping("/get")
+    @GetMapping
     public ResponseEntity<Optional<User>> getUser(@RequestParam("userId") Long userId) {
         return ResponseEntity.ok(userService.findUserById(userId));
     }

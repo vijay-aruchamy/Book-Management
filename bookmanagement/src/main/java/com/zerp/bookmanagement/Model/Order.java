@@ -46,6 +46,13 @@ public class Order {
     @Column(name ="total")
     private long total;
 
+    
+    @Column(name = "ordered_date")
+    private LocalDateTime createdDate;
+
+    @Column(name = "modified_date")
+    private LocalDateTime modifiedDate;
+
 
     public long getTotal() {
         return total;
@@ -95,11 +102,6 @@ public class Order {
         this.pincode = pincode;
     }
 
-    @Column(name = "ordered_date")
-    private LocalDateTime createdDate;
-
-    @Column(name = "modified_date")
-    private LocalDateTime modifiedDate;
 
     public Long getOrderId() {
         return orderId;
