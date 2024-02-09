@@ -1,6 +1,13 @@
 package com.zerp.bookmanagement.Model;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,7 +18,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
@@ -97,11 +104,9 @@ public class User {
         this.modifiedDate = localDate;
     }
 
-    User()
+    User( )
     {
         
     }
 
 }
-
-
