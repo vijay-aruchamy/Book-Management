@@ -2,7 +2,8 @@ package com.zerp.bookmanagement.Security;
 
 import org.springframework.beans.factory.annotation.Autowired; 
 import org.springframework.context.annotation.Bean; 
-import org.springframework.context.annotation.Configuration; 
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -44,6 +45,7 @@ public class SecurityConfig {
                         .requestMatchers("/users").permitAll())
                         .authorizeHttpRequests(requests -> requests
                         .requestMatchers("/users/login").permitAll())
+						.authorizeHttpRequests(requests -> requests.requestMatchers("/books").authenticated())
                 .authorizeHttpRequests(requests -> requests.requestMatchers("/auth/user/**").authenticated())
                 .authorizeHttpRequests(requests -> requests.requestMatchers("/auth/admin/**").authenticated())
                 .sessionManagement(management -> management

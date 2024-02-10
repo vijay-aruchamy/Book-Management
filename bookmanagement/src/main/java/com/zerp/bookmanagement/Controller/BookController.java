@@ -31,6 +31,7 @@ public class BookController {
 
     @GetMapping
     public ResponseEntity<List<Book>> getAllBooks() {
+        System.out.println("welcome");
         List<Book> books = bookService.getAllBooks();
         return ResponseEntity.ok(books);
     }

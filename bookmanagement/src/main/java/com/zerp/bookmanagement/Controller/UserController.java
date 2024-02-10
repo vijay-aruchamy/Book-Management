@@ -23,13 +23,14 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> addUser(@RequestBody User user) {
-      System.out.println("reachingg");
+   
         User savedUser = userService.addUser(user);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
     }
 
     @PostMapping("/login")
     public String login(@RequestBody User user) {
+        System.out.println("reachingg");
         return userService.loginCheck(user);
     }
 
