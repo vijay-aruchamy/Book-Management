@@ -23,11 +23,9 @@ public class OrderStatus {
     @Column(name = "is_active")
     private boolean isActive;
 
-  
     @Column(name = "created_date")
-    private LocalDateTime createdDate;   
+    private LocalDateTime createdDate;
 
-   
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
 

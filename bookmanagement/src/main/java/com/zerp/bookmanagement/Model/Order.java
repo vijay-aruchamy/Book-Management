@@ -22,7 +22,6 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-     
 
     @ManyToOne
     @JoinColumn(name = "status_id")
@@ -43,16 +42,14 @@ public class Order {
     @Column(name = "pincode")
     private String pincode;
 
-    @Column(name ="total")
+    @Column(name = "total")
     private long total;
 
-    
     @Column(name = "ordered_date")
     private LocalDateTime createdDate;
 
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
-
 
     public long getTotal() {
         return total;
@@ -102,7 +99,6 @@ public class Order {
         this.pincode = pincode;
     }
 
-
     public Long getOrderId() {
         return orderId;
     }
@@ -119,8 +115,6 @@ public class Order {
         this.user = user;
     }
 
-   
-    
     public OrderStatus getStatusId() {
         return statusId;
     }
@@ -128,8 +122,6 @@ public class Order {
     public void setStatusId(OrderStatus statusId) {
         this.statusId = statusId;
     }
-
-   
 
     public LocalDateTime getCreatedDate() {
         return createdDate;

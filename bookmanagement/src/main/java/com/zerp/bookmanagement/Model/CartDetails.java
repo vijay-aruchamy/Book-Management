@@ -14,7 +14,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "cart_details")
 public class CartDetails {
- 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,21 +35,17 @@ public class CartDetails {
     @JoinColumn(name = "book_id")
     private Book book;
 
-
-    
     @Column(name = "created_date")
     private LocalDateTime createdDate;
 
-   
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
-
 
     @Column(name = "quantity")
     private int Quantity;
 
-    @Column(name="price")
-     private double price;
+    @Column(name = "price")
+    private double price;
 
     public double getPrice() {
         return price;
@@ -68,12 +63,10 @@ public class CartDetails {
         Quantity = quantity;
     }
 
-   
     public Cart getCart() {
         return cart;
     }
 
-   
     public void setCart(Cart cart) {
         this.cart = cart;
     }

@@ -4,6 +4,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zerp.bookmanagement.Model.User;
@@ -19,18 +20,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class UserController {
     @Autowired
     private UserServiceImpl userService;
-    
 
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody User user) {
-   
-        User savedUser = userService.addUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedUser);
+    public BodyBuilder addUser(@RequestBody User user) {
+
+        userService.addUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
     public String login(@RequestBody User user) {
-        System.out.println("reachingg");
+
         return userService.loginCheck(user);
     }
 

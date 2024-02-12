@@ -14,13 +14,12 @@ public class UserInfoDetails implements UserDetails {
     private String password;
 
     public UserInfoDetails(User user) {
-        this.name = user.getUserName();
+        this.name = user.getEmail();
         this.password = user.getPassword();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Return empty authorities
         return Collections.emptyList();
     }
 

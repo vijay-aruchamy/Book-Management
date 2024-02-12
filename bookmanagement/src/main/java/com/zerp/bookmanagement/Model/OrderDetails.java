@@ -15,10 +15,10 @@ import jakarta.persistence.Table;
 @Table(name = "order_details")
 public class OrderDetails {
 
-     @Id
-     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-   
+
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
@@ -27,16 +27,12 @@ public class OrderDetails {
     @JoinColumn(name = "book_id")
     private Book book;
 
-
-     
     @Column(name = "created_date")
     private LocalDateTime createdDate;
-
 
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
 
-    
     @Column(name = "quantity")
     private int quantity;
 
@@ -45,11 +41,8 @@ public class OrderDetails {
     }
 
     public void setQuantity(int quantity) {
-      this. quantity = quantity;
+        this.quantity = quantity;
     }
-
-
-    
 
     public Order getOrder() {
         return order;

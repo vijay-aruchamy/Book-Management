@@ -13,7 +13,6 @@ import jakarta.persistence.Table;
 @Table(name = "Book")
 public class Book {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "book_id")
@@ -31,14 +30,11 @@ public class Book {
     @Column(name = "is_active")
     private boolean isActive;
 
-    
     @Column(name = "created_date")
     private LocalDateTime createdDate;
 
-    
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;
-
 
     @Column(name = "quantity")
     private int Quantity;

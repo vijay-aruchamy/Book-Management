@@ -24,14 +24,12 @@ public class BookController {
     @PostMapping
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
 
-        System.out.println(book.getBookName());
         Book savedBook = bookService.saveBook(book);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
     }
 
     @GetMapping
     public ResponseEntity<List<Book>> getAllBooks() {
-        System.out.println("welcome");
         List<Book> books = bookService.getAllBooks();
         return ResponseEntity.ok(books);
     }

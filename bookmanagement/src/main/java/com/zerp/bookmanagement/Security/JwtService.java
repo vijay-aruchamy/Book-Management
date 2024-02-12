@@ -18,15 +18,15 @@ import java.util.function.Function;
 public class JwtService { 
 
 	public static final String SECRET = "5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437"; 
-	public String generateToken(String userName) { 
+	public String generateToken(String Email) { 
 		Map<String, Object> claims = new HashMap<>(); 
-		return createToken(claims, userName); 
+		return createToken(claims, Email); 
 	} 
 
-	private String createToken(Map<String, Object> claims, String userName) { 
+	private String createToken(Map<String, Object> claims, String Email) { 
 		return Jwts.builder() 
 				.setClaims(claims) 
-				.setSubject(userName) 
+				.setSubject(Email) 
 				.setIssuedAt(new Date(System.currentTimeMillis())) 
 				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30)) 
 				.signWith(getSignKey(), SignatureAlgorithm.HS256).compact(); 
@@ -65,15 +65,10 @@ public class JwtService {
 
 	public Boolean validateToken(String token, UserDetails userDetails) { 
 		final String username = extractUsername(token); 
-		System.out.println(userDetails.getUsername()+"000000000");
 		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token)); 
 	}
 
-    // public String getUsernameFromToken(String jwtToken) {
-    //     // TODO Auto-generated method stub
-    //     throw new UnsupportedOperationException("Unimplemented method 'getUsernameFromToken'");
-    // } 
-
+  
 
 } 
 

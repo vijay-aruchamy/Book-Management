@@ -18,7 +18,7 @@ import com.zerp.bookmanagement.Repository.CartDetailsRepository;
 import com.zerp.bookmanagement.Repository.OrderDetailsRepository;
 import com.zerp.bookmanagement.Repository.OrderRepository;
 import com.zerp.bookmanagement.Service.OrderDetailsService;
-  
+
 @Service
 public class OrderDetailsServiceImpl implements OrderDetailsService {
   @Autowired
@@ -34,13 +34,12 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     OrderDetails orderDetails = new OrderDetails();
     orderDetails.setOrder(order);
     orderDetails.setBook(book);
-   orderDetails.setCreatedDate(LocalDateTime.now());
+    orderDetails.setCreatedDate(LocalDateTime.now());
     orderDetails.setModifiedDate(LocalDateTime.now());
     orderDetailsRepository.save(orderDetails);
 
   }
 
-  
   public void createCartOrder(Order order, Cart cart) throws Exception {
 
     List<CartDetails> cartDetails = cartDetailsRepository.findByCart(cart);
@@ -68,9 +67,9 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     double total = 0;
     for (OrderDetails items : orderDetails) {
       Book book = items.getBook();
-      data.put(book.getBookName()+"-Quantity",(double) items.getQuantity());
-      data.put(book.getBookName(), book.getPrice()*items.getQuantity());
-      total += book.getPrice()*items.getQuantity();
+      data.put(book.getBookName() + "-Quantity", (double) items.getQuantity());
+      data.put(book.getBookName(), book.getPrice() * items.getQuantity());
+      total += book.getPrice() * items.getQuantity();
     }
     data.put("total", total);
     return data;
