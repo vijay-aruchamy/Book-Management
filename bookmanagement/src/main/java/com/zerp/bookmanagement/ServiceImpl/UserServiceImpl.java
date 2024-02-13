@@ -27,6 +27,7 @@ public class UserServiceImpl {
     @Autowired
     JwtService jwtService;
 
+    
     public User addUser(User user) {
         try {
             user.setPassword(encoder.encode(user.getPassword()));
@@ -49,7 +50,7 @@ public class UserServiceImpl {
             User user = userRepository.findByEmail(user1.getEmail());
 
             if (user != null && encoder.matches(user1.getPassword(), user.getPassword())) {
-                return "BearerToken=" + jwtService.generateToken(user.getEmail());
+                return "BearerToken = " + jwtService.generateToken(user.getEmail());
             }
         }
         return "Login UnSuccessful Password is Wrong ";

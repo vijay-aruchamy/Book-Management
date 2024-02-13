@@ -4,7 +4,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.zerp.bookmanagement.Model.User;
@@ -22,10 +21,10 @@ public class UserController {
     private UserServiceImpl userService;
 
     @PostMapping
-    public BodyBuilder addUser(@RequestBody User user) {
+    public ResponseEntity<String> addUser(@RequestBody User user) {
 
         userService.addUser(user);
-        return ResponseEntity.status(HttpStatus.CREATED);
+   return  ResponseEntity.status(HttpStatus.CREATED).body("User Registered");
     }
 
     @PostMapping("/login")

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,9 +24,9 @@ public class AddressController {
     private AddressServiceImpl addressServiceImpl;
 
     @PostMapping
-    public ResponseEntity<Address> saveAddress(@RequestBody Address address) throws NotFoundException {
-        Address savedAddress = addressServiceImpl.saveAddress(address);
-        return ResponseEntity.ok(savedAddress);
+    public ResponseEntity<String> saveAddress(@RequestBody Address address) throws NotFoundException {
+       addressServiceImpl.saveAddress(address);
+       return ResponseEntity.status(HttpStatus.CREATED).body("User Registered");
 
     }
 

@@ -1,5 +1,6 @@
 package com.zerp.bookmanagement.ServiceImpl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,8 @@ public class BookServiceImpl implements BookService {
     public Book saveBook(Book book) {
         try {
             book.setActive(true);
+            book.setCreatedDate(LocalDateTime.now());
+            book.setModifiedDate(LocalDateTime.now());
             return bookRepository.save(book);
         } catch (Exception e) {
             throw new DataIntegrityViolationException("Data is repeated");
