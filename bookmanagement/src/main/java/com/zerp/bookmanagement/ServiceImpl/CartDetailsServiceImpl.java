@@ -26,7 +26,7 @@ public class CartDetailsServiceImpl implements CartDetailsService {
   @Autowired
   CartRepository cartRepository;
   @Autowired
-  UserServiceImpl userServiceImpl;
+  UserServiceImpl userServiceImpl;  
   @Autowired
   BookServiceImpl bookServiceImpl;
   @Autowired

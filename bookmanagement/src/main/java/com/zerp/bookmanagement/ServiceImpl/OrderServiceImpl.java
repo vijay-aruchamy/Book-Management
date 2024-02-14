@@ -61,7 +61,7 @@ public class OrderServiceImpl implements OrderService {
       System.err.println("Address not found with ID: " + data.get("addressId"));
       return;
     }
-    order.setAddressLine1(address.get().getAddressLine1());
+    order.setAddressLine1(address.get().getAddressLine1()); 
     order.setAddressLine2(address.get().getAddressLine1());
     order.setDistrict(address.get().getDistrict());
     order.setState(address.get().getState());
