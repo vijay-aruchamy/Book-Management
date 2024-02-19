@@ -37,9 +37,15 @@ public class JwtService {
 		return Keys.hmacShaKeyFor(keyBytes); 
 	} 
 
-	public String extractUsername(String token) { 
-		return extractClaim(token, Claims::getSubject); 
-	} 
+	public String extractUsername(String token) {
+		Claims claims = extractAllClaims(token);
+		String username = claims.getSubject();
+		if (username == null) {
+			throw new IllegalArgumentException("Username not found in token");
+		}
+		return username;
+	}
+	
 
 	public Date extractExpiration(String token) { 
 		return extractClaim(token, Claims::getExpiration); 

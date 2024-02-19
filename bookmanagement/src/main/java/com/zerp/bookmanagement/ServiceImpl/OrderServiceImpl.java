@@ -61,18 +61,24 @@ public class OrderServiceImpl implements OrderService {
       System.err.println("Address not found with ID: " + data.get("addressId"));
       return;
     }
+    
     order.setAddressLine1(address.get().getAddressLine1()); 
-    order.setAddressLine2(address.get().getAddressLine1());
+    order.setAddressLine2(address.get().getAddressLine2());
     order.setDistrict(address.get().getDistrict());
     order.setState(address.get().getState());
     order.setPincode(address.get().getPincode());
     order.setCreatedDate(LocalDateTime.now());
     order.setModifiedDate(LocalDateTime.now());
     order.setUser(user.get());
-    Optional<OrderStatus> status = orderStatusRepository.findById(1);
-    System.out.println(address.get().getAddressLine1());
+    Optional<OrderStatus>  status = orderStatusRepository.findById(4);
     order.setStatusId(status.get());
+    try{
     orderRepository.save(order);
+    }
+    catch(Exception e)
+    {
+      e.printStackTrace();
+    }
     orderDetailsServiceImpl.createOrder(order, book.get());
 
   }
@@ -90,7 +96,7 @@ public class OrderServiceImpl implements OrderService {
         return;
       }
       Order order = new Order();
-      Optional<OrderStatus> status = orderStatusRepository.findById(1);
+      Optional<OrderStatus> status = orderStatusRepository.findById(4);
       Optional<Address> address = addressRepository.findById(data.get("addressId"));
       if (!address.isPresent()) {
         System.err.println("Address not found with ID: " + data.get("addressId"));
@@ -115,7 +121,7 @@ public class OrderServiceImpl implements OrderService {
 
   public void orderConform(Long orderId) {
     Optional<Order> order = orderRepository.findById(orderId);
-    Optional<OrderStatus> status = orderStatusRepository.findById(2);
+    Optional<OrderStatus> status = orderStatusRepository.findById(5);
     order.get().setStatusId(status.get());
     try {
       orderRepository.save(order.get());
