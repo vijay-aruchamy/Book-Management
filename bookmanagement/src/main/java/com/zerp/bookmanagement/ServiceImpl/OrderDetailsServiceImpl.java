@@ -32,22 +32,9 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
   public void createOrder(Order order, Book book) {
     OrderDetails orderDetails = new OrderDetails();
-    try
-    {
     orderDetails.setOrder(order);
-    }
-    catch(Exception e)
-    {
-     e.printStackTrace();
-    }
-    try
-    {
     orderDetails.setBook(book);
-    }
-    catch(Exception e)
-    {
-     e.printStackTrace();
-    }
+    orderDetails.setQuantity(1);
     orderDetails.setCreatedDate(LocalDateTime.now());
     orderDetails.setModifiedDate(LocalDateTime.now());
     orderDetailsRepository.save(orderDetails);

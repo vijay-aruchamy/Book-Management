@@ -104,7 +104,6 @@ public class OrderServiceImpl implements OrderService {
       }
       order.setAddressLine1(address.get().getAddressLine1());
       order.setAddressLine2(address.get().getAddressLine2());
-      System.out.println(address.get().getAddressLine1());
       order.setDistrict(address.get().getDistrict());
       order.setState(address.get().getState());
       order.setPincode(address.get().getPincode());
